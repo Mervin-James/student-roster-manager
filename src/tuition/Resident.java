@@ -5,9 +5,8 @@ public class Resident extends Student {
     private float financialAid;
     private float tuition;
 
-    public Resident(float tuition, float financialAid) {
-        this.tuition = tuition;
-        this.financialAid = financialAid;
+    public Resident() {
+
     }
 
     private boolean isFinancialAidValid(float financialAid) {

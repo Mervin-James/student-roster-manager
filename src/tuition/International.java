@@ -5,9 +5,8 @@ public class International extends NonResident {
     private int credits;
     private float additionalFee;
 
-    public International(int credits, float additionalFee) {
-        this.credits = credits;
-        this.additionalFee = additionalFee;
+    public International() {
+
     }
 
     private boolean isCreditsValid(int credits) {

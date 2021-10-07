@@ -4,6 +4,11 @@ public class Roster {
     private Student[] roster;
     private int size; //keep track of the number of students in the roster
 
+    public Roster(Student[] roster, int size) {
+        this.roster = roster;
+        this.size = size;
+    }
+
     private int find(Student student) {
         for(int i = 0; i < size; i++) {
             if(roster[i].equals(student)) {
