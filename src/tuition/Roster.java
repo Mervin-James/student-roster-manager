@@ -5,7 +5,7 @@ public class Roster {
     private int size; //keep track of the number of students in the roster
 
     private int find(Student student) {
-        for(int i=0; i< size; i++) {
+        for(int i = 0; i < size; i++) {
             if(roster[i].equals(student)) {
                 return i;
             }
@@ -40,7 +40,7 @@ public class Roster {
         Student[] newRoster = new Student[size];
         boolean isSkipped = false;  //marks when the deleted student has
         // been skipped
-        for(int i=0; i< size; i++) {
+        for(int i = 0; i < size; i++) {
             if(i == studentIndex) {
                 isSkipped = true;
             }

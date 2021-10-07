@@ -1,14 +1,22 @@
 package tuition;
 
 public class International extends NonResident {
-    public float additionalFee;
-    int maxCredits = 12;
+    private static final int MAX_CREDITS = 12;
+    private int credits;
+    private float additionalFee;
 
-    public International() {
-
+    public International(int credits, float additionalFee) {
+        this.credits = credits;
+        this.additionalFee = additionalFee;
     }
 
-
+    private boolean isCreditsValid(int credits) {
+        if (credits > MAX_CREDITS) {
+            System.out.println("Invalid credit hours.");
+            return false;
+        }
+        return true;
+    }
 
 
 
