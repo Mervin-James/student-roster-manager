@@ -10,22 +10,20 @@ public class Student {
     private float tuition;
     private float totalPayment;
     private Date lastPaymentDate;
-    private float tuitionDue;
+    private float amountDue;
 
     public Student(String name, Major major) {
         Profile profile = new Profile(name, major);
         this.profile = profile;
     }
 
-    public Student(String name, Major major, int credits, float tuition,
-                   float totalPayment,
-                   Date lastPaymentDate, float tuitionDue) {
+    public Student(String name, Major major, int credits) {
         this.profile = new Profile(name, major);
         this.credits = credits;
-        this.tuition = tuition;
-        this.totalPayment = totalPayment;
-        this.lastPaymentDate = lastPaymentDate;
-        this.tuitionDue = tuitionDue;
+        this.tuition = 0;
+        this.totalPayment = 0;
+        this.lastPaymentDate = null;
+        this.amountDue = 0;
     }
 
     public Student() {
@@ -37,9 +35,11 @@ public class Student {
     @Override
     public String toString() {
         return profile + ":" + credits + " credit hours" +
-                ":" + "tuition due:" + tuitionDue + ":" + "total " +
+                ":" + "tuition due:" + amountDue + ":" + "total " +
                 "payment:" + totalPayment + ":" + "last payment date:" +
-                " " + lastPaymentDate;
+                " " + (lastPaymentDate == null ?
+                "--/--/--" :
+                lastPaymentDate.toString());
     }
 
     @Override
@@ -57,6 +57,22 @@ public class Student {
 
     public float getTuition() {
         return tuition;
+    }
+
+    public void setTuition(float tuition) {
+        this.tuition = tuition;
+    }
+
+    public void setTotalPayment(float totalPayment) {
+        this.totalPayment = totalPayment;
+    }
+
+    public void setLastPaymentDate(Date lastPaymentDate) {
+        this.lastPaymentDate = lastPaymentDate;
+    }
+
+    public void setTuitionDue(float amountDue) {
+        this.amountDue = amountDue;
     }
 
 }
