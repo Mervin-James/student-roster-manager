@@ -2,6 +2,9 @@ package tuition;
 
 public class Student {
     protected static final float UNIVERSITY_FEE = 3268;
+    protected static final int FULL_TIME_BASE_RATE_MAX_CREDITS = 16;
+    protected static final int FULL_TIME_BASE_RATE_MIN_CREDITS = 12;
+    protected static final float PART_TIME_UNIVERSITY_FEE_MULTIPLIER = 0.8f;
     private Profile profile;
     private int credits;
     private float tuition;

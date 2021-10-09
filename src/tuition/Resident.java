@@ -4,20 +4,14 @@ public class Resident extends Student {
     private static final float MAX_FINANCIAL_AID = 10000;
     private static final float FULL_TIME_TUITION_FEE = 12536;
     private static final float RATE_PER_CREDIT_HOUR = 404;
-    private static final int FULL_TIME_BASE_RATE_MAX_CREDITS = 16;
-    private static final int FULL_TIME_BASE_RATE_MIN_CREDITS = 12;
-    private static final float PART_TIME_UNIVERSITY_FEE_MULTIPLIER = 0.8f;
-    private float amountDue;
     private final float financialAid;
+    private float amountDue;
 
     public Resident(String name, Major major, int credits, float financialAid,
                     float tuition, float totalPayment,
                     Date lastPaymentDate, float tuitionDue) {
         super(name,
-                major, credits,
-                tuition,
-                totalPayment,
-                lastPaymentDate,
+                major, credits, tuition, totalPayment, lastPaymentDate,
                 tuitionDue);
         this.financialAid = financialAid;
 
@@ -31,7 +25,6 @@ public class Resident extends Student {
         return true;
     }
 
-
     @Override
     public void tuitionDue() {
         int numCredits = super.getCredits();
@@ -39,20 +32,24 @@ public class Resident extends Student {
             amountDue =
                     FULL_TIME_TUITION_FEE + UNIVERSITY_FEE +
                             RATE_PER_CREDIT_HOUR * (numCredits -
-                                    FULL_TIME_BASE_RATE_MAX_CREDITS);
+                                    FULL_TIME_BASE_RATE_MAX_CREDITS) - financialAid;
         } else if (numCredits >= FULL_TIME_BASE_RATE_MIN_CREDITS) {
-            amountDue = FULL_TIME_TUITION_FEE + UNIVERSITY_FEE;
+            amountDue = FULL_TIME_TUITION_FEE + UNIVERSITY_FEE - financialAid;
         } else {
             amountDue =
                     RATE_PER_CREDIT_HOUR * numCredits +
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
-                                    UNIVERSITY_FEE;
+                                    UNIVERSITY_FEE - financialAid;
         }
     }
 
     @Override
     public String toString() {
         return super.toString() + ":resident";
+    }
+
+    public float getTuitionDue() {
+        return this.amountDue;
     }
 
 }
