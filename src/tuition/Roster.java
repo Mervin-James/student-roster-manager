@@ -3,10 +3,11 @@ package tuition;
 public class Roster {
     private Student[] roster;
     private int size; //keep track of the number of students in the roster
+    private static final int NOT_FOUND = -1;
 
-    public Roster(Student[] roster, int size) {
+    public Roster(Student[] roster) {
         this.roster = roster;
-        this.size = size;
+        this.size = 0;
     }
 
     private int find(Student student) {
@@ -15,7 +16,7 @@ public class Roster {
                 return i;
             }
         }
-        return -1;
+        return NOT_FOUND;
     }
 
     private void grow() {
@@ -60,16 +61,18 @@ public class Roster {
         return true;
     }
 
-    public float calculateAllTuition() {
-        float totalTuition = 0;
+    public void calculateAllTuition() {
         for(int i=0; i<size; i++) {
-            totalTuition += roster[i].getTuition();
+            roster[i].tuitionDue();
         }
-        return totalTuition;
     }
 
-    public boolean payTuition(Student student) {
-        return false;
+    public Student retrieveStudent(Student student) {
+        int studentIndex = find(student);
+        if(studentIndex == NOT_FOUND) {
+            return null;
+        }
+        return roster[studentIndex];
     }
 
     @Override

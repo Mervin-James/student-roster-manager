@@ -4,13 +4,11 @@ public class Resident extends Student {
     private static final float MAX_FINANCIAL_AID = 10000;
     private static final float FULL_TIME_TUITION_FEE = 12536;
     private static final float RATE_PER_CREDIT_HOUR = 404;
-    private final float financialAid;
+    private float financialAid;
     private float amountDue;
 
-    public Resident(String name, Major major, int credits, float financialAid) {
+    public Resident(String name, Major major, int credits) {
         super(name, major, credits);
-        this.financialAid = financialAid;
-
     }
 
     private boolean isFinancialAidValid(float financialAid) {
@@ -46,6 +44,10 @@ public class Resident extends Student {
 
     public float getTuitionDue() {
         return this.amountDue;
+    }
+
+    public void setFinancialAid(float financialAid) {
+        this.financialAid = financialAid;
     }
 
 }

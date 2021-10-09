@@ -55,28 +55,38 @@ public class Student {
         return this.credits;
     }
 
-    public float getTuition() {
-        return tuition;
-    }
-
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    public float getTuition() {
+        return this.tuition;
     }
 
     public void setTuition(float tuition) {
         this.tuition = tuition;
     }
 
+    public float getTotalPayment() {
+        return this.totalPayment;
+    }
+
     public void setTotalPayment(float totalPayment) {
         this.totalPayment = totalPayment;
     }
 
-    public void setLastPaymentDate(Date lastPaymentDate) {
-        this.lastPaymentDate = lastPaymentDate;
+    public void payTuition(float payment, Date paymentDate) {
+        this.totalPayment += payment;
+        this.amountDue = this.tuition - this.totalPayment;
+        this.lastPaymentDate = paymentDate;
     }
 
-    public void setTuitionDue(float amountDue) {
-        this.amountDue = amountDue;
+    public float getAmountDue() {
+        return this.amountDue;
+    }
+
+    public void setLastPaymentDate(Date lastPaymentDate) {
+        this.lastPaymentDate = lastPaymentDate;
     }
 
 }
