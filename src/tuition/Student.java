@@ -1,10 +1,14 @@
 package tuition;
 
 public class Student {
-    Profile profile;
-    public float tuition;
-    public int credits;
+    private Profile profile;
+    private float tuition;
+    private int credits;
 
+    public Student(String name, Major major) {
+        Profile profile = new Profile(name, major);
+        this.profile = profile;
+    }
 
     public void tuitionDue() {}
 
@@ -13,4 +17,24 @@ public class Student {
         return "";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Student) {
+            Student student = (Student) obj;
+            return student.profile.equals(this.profile);
+        }
+        return false;
+    }
+
+    public Profile getProfile() {
+        return this.profile;
+    }
+
+    public float getTuition() {
+        return this.tuition;
+    }
+
+    public int getCredits() {
+        return this.credits;
+    }
 }

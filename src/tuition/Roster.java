@@ -59,4 +59,16 @@ public class Roster {
         roster = newRoster;
         return true;
     }
+
+    public float calculateAllTuition() {
+        float totalTuition = 0;
+        for(int i=0; i<size; i++) {
+            totalTuition += roster[i].getTuition();
+        }
+        return totalTuition;
+    }
+
+    public boolean payTuition(Student student) {
+        return false;
+    }
 }

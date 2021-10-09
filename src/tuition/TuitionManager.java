@@ -1,6 +1,5 @@
 package tuition;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class TuitionManager {
@@ -24,6 +23,12 @@ public class TuitionManager {
 
             } else if (command.equals("AI") && splitInput.length == 3) {
 
+            } else if (command.equals("R") && splitInput.length == 1) {
+                removeStudent(roster, splitInput);
+            } else if (command.equals("C") && splitInput.length == 1) {
+                calculateAllTuition(roster);
+            } else if (command.equals("T") && splitInput.length == 1) {
+                payTuition(roster, splitInput);
             } else {
                 System.out.println("Command " + command + " not " +
                         "supported!");
@@ -67,13 +72,40 @@ public class TuitionManager {
             return Major.IT;
         } else if (stringMajor.equals("BA")) {
             return Major.BA;
-        } else if (stringMajor.equals("EE"))  {
+        } else if (stringMajor.equals("EE")) {
             return Major.EE;
         } else if (stringMajor.equals("ME")) {
             return Major.ME;
         } else {
             return null;
         }
+    }
+
+    private void removeStudent(Roster roster, String[] splitInput) {
+        String name = splitInput[1];
+        Major major = checkMajor(splitInput[2]);
+        Student student = new Student(name, major);
+        roster.remove(student);
+    }
+
+    private void calculateAllTuition(Roster roster) {
+        float totalTuition = roster.calculateAllTuition();
+        System.out.println("Calculation completed.");
+    }
+
+    private void payTuition(Roster roster, String[] splitInput) {
+        String name = splitInput[1];
+        Major major = checkMajor(splitInput[2]);
+        int payment = Integer.parseInt(splitInput[3]);
+        Date paymentDate = new Date(splitInput[4]);
+        Student student = new Student(name, major);
+
+        //TODO: Figure out how to payTuition w/o passing in payment as
+        // parameter to roster.payTuition(student);
+    }
+
+    private void printRoster(Roster roster) {
+        System.out.println("* list of students in the roster **");
     }
 
 
