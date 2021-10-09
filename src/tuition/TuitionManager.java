@@ -47,22 +47,21 @@ public class TuitionManager {
         int credits = Integer.parseInt(splitInput[3]);
         switch (command) {
             case "AR":
-//                Resident resident = new Resident("bob", Major.BA, 14,1000f,
-//                        1000f, 1000f, new Date("01/01/2021"), 500f);
-                Resident resident = new Resident(name, major, credits);
+                Resident resident = new Resident(name, major, credits, 1000f);
                 roster.add(resident);
                 break;
             case "AN":
-                NonResident nonResident = new NonResident("bob", Major.BA, 14,
-                        1000f, 1000f, new Date("01/01/2021"), 500f);
+                NonResident nonResident = new NonResident("bob", Major.BA, 14);
                 roster.add(nonResident);
                 break;
             case "AT":
-                TriState triState = new TriState();
+                TriState triState = new TriState("bob", Major.BA, 15, 1000f
+                        , State.NY);
                 roster.add(triState);
                 break;
             case "AI":
-                International international = new International();
+                International international = new International("rob",
+                        Major.ME, 15, false);
                 roster.add(international);
                 break;
         }

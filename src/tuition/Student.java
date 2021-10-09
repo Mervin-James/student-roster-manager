@@ -59,6 +59,10 @@ public class Student {
         return tuition;
     }
 
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
     public void setTuition(float tuition) {
         this.tuition = tuition;
     }

@@ -7,9 +7,7 @@ public class Resident extends Student {
     private final float financialAid;
     private float amountDue;
 
-    public Resident(String name, Major major, int credits, float financialAid,
-                    float tuition, float totalPayment,
-                    Date lastPaymentDate, float tuitionDue) {
+    public Resident(String name, Major major, int credits, float financialAid) {
         super(name, major, credits);
         this.financialAid = financialAid;
 
