@@ -14,8 +14,6 @@ public class Student {
         this.profile = profile;
     }
 
-    //
-
     public Student(String name, Major major, int credits, float tuition,
                    float totalPayment,
                    Date lastPaymentDate, float tuitionDue) {
@@ -27,7 +25,8 @@ public class Student {
         this.tuitionDue = tuitionDue;
     }
 
-    public Student() {}
+    public Student() {
+    }
 
     public void tuitionDue() {
     }
@@ -49,23 +48,12 @@ public class Student {
         return false;
     }
 
-    //    public Profile getProfile() {
-//        return this.profile;
-//    }
     public int getCredits() {
         return this.credits;
     }
 
     public float getTuition() {
         return tuition;
-    }
-
-    public float getTotalPayment() {
-        return this.totalPayment;
-    }
-
-    public Date getLastPaymentDate() {
-        return this.lastPaymentDate;
     }
 
 }

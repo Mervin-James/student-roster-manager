@@ -7,8 +7,8 @@ public class Resident extends Student {
     private static final int FULL_TIME_BASE_RATE_MAX_CREDITS = 16;
     private static final int FULL_TIME_BASE_RATE_MIN_CREDITS = 12;
     private static final float PART_TIME_UNIVERSITY_FEE_MULTIPLIER = 0.8f;
-    private float tuitionDue;
-    private float financialAid;
+    private float amountDue;
+    private final float financialAid;
 
     public Resident(String name, Major major, int credits, float financialAid,
                     float tuition, float totalPayment,
@@ -36,14 +36,14 @@ public class Resident extends Student {
     public void tuitionDue() {
         int numCredits = super.getCredits();
         if (numCredits >= FULL_TIME_BASE_RATE_MAX_CREDITS) {
-            tuitionDue =
+            amountDue =
                     FULL_TIME_TUITION_FEE + UNIVERSITY_FEE +
                             RATE_PER_CREDIT_HOUR * (numCredits -
                                     FULL_TIME_BASE_RATE_MAX_CREDITS);
         } else if (numCredits >= FULL_TIME_BASE_RATE_MIN_CREDITS) {
-            tuitionDue = FULL_TIME_TUITION_FEE + UNIVERSITY_FEE;
+            amountDue = FULL_TIME_TUITION_FEE + UNIVERSITY_FEE;
         } else {
-            tuitionDue =
+            amountDue =
                     RATE_PER_CREDIT_HOUR * numCredits +
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
                                     UNIVERSITY_FEE;
