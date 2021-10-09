@@ -47,8 +47,9 @@ public class TuitionManager {
         int credits = Integer.parseInt(splitInput[3]);
         switch (command) {
             case "AR":
-                Resident resident = new Resident("bob", Major.BA, 14,1000f,
-                        1000f, 1000f, new Date("01/01/2021"), 500f);
+//                Resident resident = new Resident("bob", Major.BA, 14,1000f,
+//                        1000f, 1000f, new Date("01/01/2021"), 500f);
+                Resident resident = new Resident(name, major, credits);
                 roster.add(resident);
                 break;
             case "AN":

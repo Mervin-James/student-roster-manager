@@ -10,9 +10,7 @@ public class Resident extends Student {
     public Resident(String name, Major major, int credits, float financialAid,
                     float tuition, float totalPayment,
                     Date lastPaymentDate, float tuitionDue) {
-        super(name,
-                major, credits, tuition, totalPayment, lastPaymentDate,
-                tuitionDue);
+        super(name, major, credits);
         this.financialAid = financialAid;
 
     }
