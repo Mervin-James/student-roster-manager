@@ -7,13 +7,19 @@ public class Resident extends Student {
     private static final int FULL_TIME_BASE_RATE_MAX_CREDITS = 16;
     private static final int FULL_TIME_BASE_RATE_MIN_CREDITS = 12;
     private static final float PART_TIME_UNIVERSITY_FEE_MULTIPLIER = 0.8f;
-    private float financialAid;
-    private  float tuition;
-    private  float totalPayment;
-    private  Date lastPaymentDate;
     private float tuitionDue;
+    private float financialAid;
 
-    public Resident() {
+    public Resident(String name, Major major, int credits, float financialAid,
+                    float tuition, float totalPayment,
+                    Date lastPaymentDate, float tuitionDue) {
+        super(name,
+                major, credits,
+                tuition,
+                totalPayment,
+                lastPaymentDate,
+                tuitionDue);
+        this.financialAid = financialAid;
 
     }
 
@@ -42,6 +48,11 @@ public class Resident extends Student {
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
                                     UNIVERSITY_FEE;
         }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ":resident";
     }
 
 }

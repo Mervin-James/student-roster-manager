@@ -71,4 +71,12 @@ public class Roster {
     public boolean payTuition(Student student) {
         return false;
     }
+
+    @Override
+    public String toString() {
+        for(int i=0; i<size; i++) {
+            return roster[i].toString();
+        }
+        return "";
+    }
 }

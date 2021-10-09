@@ -29,6 +29,8 @@ public class TuitionManager {
                 calculateAllTuition(roster);
             } else if (command.equals("T") && splitInput.length == 1) {
                 payTuition(roster, splitInput);
+            } else if (command.equals("P") && splitInput.length == 1) {
+                printRoster(roster);
             } else {
                 System.out.println("Command " + command + " not " +
                         "supported!");
@@ -45,7 +47,8 @@ public class TuitionManager {
         int credits = Integer.parseInt(splitInput[3]);
         switch (command) {
             case "AR":
-                Resident resident = new Resident();
+                Resident resident = new Resident("bob", Major.BA, 14,1000f,
+                        1000f, 1000f, new Date("01/01/2021"), 500f);
                 roster.add(resident);
                 break;
             case "AN":
@@ -106,6 +109,7 @@ public class TuitionManager {
 
     private void printRoster(Roster roster) {
         System.out.println("* list of students in the roster **");
+        System.out.println(roster.toString());
     }
 
 

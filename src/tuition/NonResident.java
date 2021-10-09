@@ -2,9 +2,9 @@ package tuition;
 
 public class NonResident extends Student {
 
-    public NonResident() {
-
-    }
+//    public NonResident() {
+//
+//    }
 
 
 

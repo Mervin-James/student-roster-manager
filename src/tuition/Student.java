@@ -2,32 +2,42 @@ package tuition;
 
 public class Student {
     protected static final float UNIVERSITY_FEE = 3268;
-    private final Profile profile;
+    private Profile profile;
     private int credits;
-//    private final float tuition;
-//    private final float totalPayment;
-//    private final Date lastPaymentDate;
-//    private float tuitionDue;
+    private float tuition;
+    private float totalPayment;
+    private Date lastPaymentDate;
+    private float tuitionDue;
 
     public Student(String name, Major major) {
         Profile profile = new Profile(name, major);
         this.profile = profile;
-//        this.tuition = 0;
-//        this.totalPayment = 0;
-        //TODO: See if this is valid
-//        this.lastPaymentDate = new Date("--/--/--");    //empty date
-//        this.tuitionDue = 0;
     }
+
+    //
+
+    public Student(String name, Major major, int credits, float tuition,
+                   float totalPayment,
+                   Date lastPaymentDate, float tuitionDue) {
+        this.profile = new Profile(name, major);
+        this.credits = credits;
+        this.tuition = tuition;
+        this.totalPayment = totalPayment;
+        this.lastPaymentDate = lastPaymentDate;
+        this.tuitionDue = tuitionDue;
+    }
+
+    public Student() {}
 
     public void tuitionDue() {
     }
 
     @Override
     public String toString() {
-        return profile.toString() + ":" + credits + " credit hours" +
+        return profile + ":" + credits + " credit hours" +
                 ":" + "tuition due:" + tuitionDue + ":" + "total " +
-                "payment:" +totalPayment + ":" + "last payment date: " +
-                lastPaymentDate;
+                "payment:" + totalPayment + ":" + "last payment date:" +
+                " " + lastPaymentDate;
     }
 
     @Override
@@ -39,28 +49,23 @@ public class Student {
         return false;
     }
 
-//    public Profile getProfile() {
+    //    public Profile getProfile() {
 //        return this.profile;
 //    }
     public int getCredits() {
-//        return this.credits;
+        return this.credits;
     }
 
     public float getTuition() {
         return tuition;
     }
 
-//    public float getTotalPayment() {
-//        return this.totalPayment;
-//    }
-//
-//    public Date getLastPaymentDate() {
-//        return this.lastPaymentDate;
-//    }
+    public float getTotalPayment() {
+        return this.totalPayment;
+    }
 
-    public boolean calculateTuitionDue() {
-        tuitionDue = tuition - totalPayment;
-        return true;
+    public Date getLastPaymentDate() {
+        return this.lastPaymentDate;
     }
 
 }
