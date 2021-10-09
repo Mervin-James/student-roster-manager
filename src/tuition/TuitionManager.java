@@ -52,7 +52,8 @@ public class TuitionManager {
                 roster.add(resident);
                 break;
             case "AN":
-                NonResident nonResident = new NonResident();
+                NonResident nonResident = new NonResident("bob", Major.BA, 14,
+                        1000f, 1000f, new Date("01/01/2021"), 500f);
                 roster.add(nonResident);
                 break;
             case "AT":
