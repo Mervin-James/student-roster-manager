@@ -1,7 +1,6 @@
 package tuition;
 
 public class TriState extends NonResident {
-    private float amountDue;
     private float discount;
     private State state;
 
@@ -15,6 +14,7 @@ public class TriState extends NonResident {
     @Override
     public void tuitionDue() {
         int numCredits = super.getCredits();
+        float amountDue = 0;
         if (numCredits >= FULL_TIME_BASE_RATE_MAX_CREDITS) {
             amountDue =
                     FULL_TIME_TUITION_FEE + UNIVERSITY_FEE +
@@ -25,18 +25,14 @@ public class TriState extends NonResident {
         } else {
             amountDue =
                     RATE_PER_CREDIT_HOUR * numCredits +
-                            PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
-                                    UNIVERSITY_FEE - discount;
+                            PART_TIME_UNIVERSITY_FEE_MULTIPLIER * UNIVERSITY_FEE;
         }
+        super.setAmountDue(amountDue);
     }
 
     @Override
     public String toString() {
         return super.toString() + "(tri-state):" + state;
-    }
-
-    public float getTuitionDue() {
-        return this.amountDue;
     }
 
 }

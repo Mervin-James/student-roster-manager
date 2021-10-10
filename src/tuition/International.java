@@ -13,7 +13,6 @@ public class International extends NonResident {
     private static final int STUDY_ABROAD_MAX_CREDITS = 12;
     private static final float ADDITIONAL_FEE = 2650;
     private boolean isStudyAbroad;
-    private float amountDue;
 
     /**
      * Constructs an International object by their name, major, and credits.
@@ -29,7 +28,7 @@ public class International extends NonResident {
     public International(String name, Major major, int credits,
                          boolean isStudyAbroad) {
         super(name, major, credits);
-        isStudyAbroad = false;
+        this.isStudyAbroad = isStudyAbroad;
     }
 
     /**
@@ -56,23 +55,26 @@ public class International extends NonResident {
     @Override
     public void tuitionDue() {
         int numCredits = super.getCredits();
+        float amountDue = 0;
         if (isStudyAbroad) {
             amountDue = UNIVERSITY_FEE + ADDITIONAL_FEE;
+            super.setAmountDue(amountDue);
             return;
         }
         if (numCredits >= FULL_TIME_BASE_RATE_MAX_CREDITS) {
             amountDue =
-                    FULL_TIME_TUITION_FEE + UNIVERSITY_FEE +
+                    FULL_TIME_TUITION_FEE + UNIVERSITY_FEE + ADDITIONAL_FEE +
                             RATE_PER_CREDIT_HOUR * (numCredits -
                                     FULL_TIME_BASE_RATE_MAX_CREDITS);
         } else if (numCredits >= FULL_TIME_BASE_RATE_MIN_CREDITS) {
-            amountDue = FULL_TIME_TUITION_FEE + UNIVERSITY_FEE;
+            amountDue = FULL_TIME_TUITION_FEE + UNIVERSITY_FEE + ADDITIONAL_FEE;
         } else {
             amountDue =
                     RATE_PER_CREDIT_HOUR * numCredits +
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
                                     UNIVERSITY_FEE;
         }
+        super.setAmountDue(amountDue);
     }
 
     /**

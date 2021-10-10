@@ -63,7 +63,7 @@ public class Roster {
     }
 
     public void calculateAllTuition() {
-        for(int i=0; i<size; i++) {
+        for(int i = 0; i < size; i++) {
             roster[i].tuitionDue();
         }
     }
@@ -86,9 +86,9 @@ public class Roster {
                     minIndex = j;
                 }
             }
-            Student tempAlbum = roster[minIndex];
+            Student tempStudent = roster[minIndex];
             roster[minIndex] = roster[i];
-            roster[i] = tempAlbum;
+            roster[i] = tempStudent;
         }
     }
 

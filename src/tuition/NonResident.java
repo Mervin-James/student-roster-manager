@@ -11,7 +11,6 @@ package tuition;
 public class NonResident extends Student {
     protected static final float FULL_TIME_TUITION_FEE = 29737;
     protected static final float RATE_PER_CREDIT_HOUR = 966;
-    private float amountDue;
 
     /**
      * Constructs a Nonresident object by their name, major, and credits.
@@ -31,6 +30,7 @@ public class NonResident extends Student {
      */
     public void tuitionDue() {
         int numCredits = super.getCredits();
+        float amountDue = 0;
         if (numCredits >= FULL_TIME_BASE_RATE_MAX_CREDITS) {
             amountDue =
                     FULL_TIME_TUITION_FEE + UNIVERSITY_FEE +
@@ -44,6 +44,7 @@ public class NonResident extends Student {
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
                                     UNIVERSITY_FEE;
         }
+        super.setAmountDue(amountDue);
     }
 
     /**

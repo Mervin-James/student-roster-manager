@@ -10,6 +10,7 @@ public class TuitionManager {
     private static final int MIN_NUM_ARGUMENTS_FOR_CREDIT_HOURS = 4;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT = 4;
     private static final int MIN_NUM_ARGUMENTS_FOR_TRISTATE = 5;
+    private static final int MIN_NUM_ARGUMENTS_FOR_INTERNATIONAL = 5;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_DATE = 5;
 
     public void run() {
@@ -119,13 +120,18 @@ public class TuitionManager {
                 isAdded = roster.add(triState);
             }
             case "AI" -> {
+                if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_INTERNATIONAL) {
+                    System.out.println("Missing data in command line.");
+                    return;
+                }
+                boolean isStudyAbroad = Boolean.parseBoolean(splitInput[4]);
                 if (credits < MIN_CREDITS_INTERNATIONAL) {
                     System.out.println("International students must enroll" +
                             " at least 12 credits.");
                     return;
                 }
                 International international = new International(name, major,
-                        credits, false);
+                        credits, isStudyAbroad);
                 isAdded = roster.add(international);
             }
         }
@@ -204,7 +210,7 @@ public class TuitionManager {
             return;
         }
         Student student = roster.retrieveStudent(new Student(name, major));
-        if(student == null) {
+        if (student == null) {
             System.out.println("Student not in the roster.");
             return;
         }
@@ -223,6 +229,7 @@ public class TuitionManager {
             System.out.println("Payment date invalid.");
             return;
         }
+        System.out.println("Payment applied.");
         student.payTuition(payment, paymentDate);
     }
 

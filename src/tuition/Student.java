@@ -74,13 +74,11 @@ public class Student {
      */
     @Override
     public String toString() {
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat df = new DecimalFormat("###,##0.00");
         return profile + ":" + credits + " credit hours" +
                 ":" + "tuition due:" + df.format(amountDue) + ":" + "total " +
                 "payment:" + df.format(totalPayment) + ":" + "last payment " +
-                "date:" +
-                " " + (lastPaymentDate == null ?
-                "--/--/--" :
+                "date: " + (lastPaymentDate == null ? "--/--/--" :
                 lastPaymentDate.toString());
     }
 
@@ -197,7 +195,7 @@ public class Student {
      */
     public void payTuition(float payment, Date paymentDate) {
         this.totalPayment += payment;
-        this.amountDue = this.tuition - this.totalPayment;
+        this.amountDue -= payment;
         this.lastPaymentDate = paymentDate;
     }
 
