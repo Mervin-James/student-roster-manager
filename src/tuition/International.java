@@ -1,5 +1,9 @@
 package tuition;
 
+/**
+ * A Class that defines an International students by name, major, and credits.
+ *
+ */
 public class International extends NonResident {
     private static final int STUDY_ABROAD_MAX_CREDITS = 12;
     private static final float ADDITIONAL_FEE = 2650;

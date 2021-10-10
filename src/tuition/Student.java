@@ -2,6 +2,15 @@ package tuition;
 
 /**
  * A class that defines a Student by their profile and tuition information.
+ * The Student class is the superclass for all the different types of
+ * students in the roster, and has a template method called tuitionDue()
+ * which is expected to be overridden in all subclasses. The Student class
+ * also contains getter and setter methods for the Student's tuition, total
+ * payment amount, and number of credits attributes. This class
+ * also contains getter methods for the Student's profile and amount due
+ * attribute, in addition to a method for paying tuition. The Student class
+ * also has methods to compare with other Student object and to generate a
+ * String representation of this Student.
  */
 public class Student {
     protected static final float UNIVERSITY_FEE = 3268;
@@ -87,6 +96,10 @@ public class Student {
         return false;
     }
 
+    /**
+     * Getter method for this Student's profile attribute.
+     * @return this Student's profile attribute.
+     */
     public Profile getProfile() {
         return profile;
     }
@@ -133,6 +146,10 @@ public class Student {
         return this.totalPayment;
     }
 
+    /**
+     * Getter method for this Student's date of last payment.
+     * @return this Student's lastPaymentDate attribute.
+     */
     public Date getLastPaymentDate() {
         return lastPaymentDate;
     }
