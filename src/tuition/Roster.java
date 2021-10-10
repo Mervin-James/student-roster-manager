@@ -77,9 +77,14 @@ public class Roster {
 
     @Override
     public String toString() {
-        for(int i=0; i<size; i++) {
-            return roster[i].toString();
+        if(size == 0) {
+            return "Student roster is empty!";
         }
-        return "";
+        String rosterList = "* list of students in the roster **\n";
+        for(int i=0; i<size; i++) {
+            rosterList += roster[i].toString() + "\n";
+        }
+        rosterList += "* end of roster **";
+        return rosterList;
     }
 }

@@ -26,7 +26,8 @@ public class Resident extends Student {
             amountDue =
                     FULL_TIME_TUITION_FEE + UNIVERSITY_FEE +
                             RATE_PER_CREDIT_HOUR * (numCredits -
-                                    FULL_TIME_BASE_RATE_MAX_CREDITS) - financialAid;
+                                    FULL_TIME_BASE_RATE_MAX_CREDITS) -
+                            financialAid;
         } else if (numCredits >= FULL_TIME_BASE_RATE_MIN_CREDITS) {
             amountDue = FULL_TIME_TUITION_FEE + UNIVERSITY_FEE - financialAid;
         } else {
@@ -44,6 +45,10 @@ public class Resident extends Student {
 
     public float getTuitionDue() {
         return this.amountDue;
+    }
+
+    public float getFinancialAid() {
+        return this.financialAid;
     }
 
     public void setFinancialAid(float financialAid) {

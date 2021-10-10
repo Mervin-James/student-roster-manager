@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class TuitionManager {
     private static final int MIN_CREDITS = 3;
+    private static final int MAX_CREDITS = 24;
+    private static final float MAX_FINANCIAL_AID = 10000;
 
     public void run() {
         System.out.println("Tuition Manager starts running.");
@@ -29,11 +31,9 @@ public class TuitionManager {
                 payTuition(roster, splitInput);
             } else if (command.equals("S")) {
                 setStudyAbroad(roster, splitInput);
-
             } else if (command.equals("F")) {
-
-            }
-            else if (command.equals("P") && splitInput.length == 1) {
+                setStudentFinancialAid(roster,splitInput);
+            } else if (command.equals("P") && splitInput.length == 1) {
                 printRoster(roster);
             } else {
                 System.out.println("Command '" + command + "' not " +
@@ -47,6 +47,7 @@ public class TuitionManager {
     private void addStudent(Roster roster, String[] splitInput) {
         if (splitInput.length < 3) {
             System.out.println("Missing data in command line.");
+            return;
         }
         String command = splitInput[0];
         String name = splitInput[1];
@@ -54,15 +55,22 @@ public class TuitionManager {
         if (major == null) {
             System.out.println(
                     "'" + splitInput[2] + "' is not a valid major.");
+            return;
         }
         if (splitInput.length < 4) {
             System.out.println("Credit hours missing.");
+            return;
         }
         int credits = Integer.parseInt(splitInput[3]);
         if (credits < 0) {
             System.out.println("Credit hours cannot be negative.");
+            return;
         } else if (credits < MIN_CREDITS) {
             System.out.println("Minimum credit hours is 3.");
+            return;
+        } else if(credits > MAX_CREDITS) {
+            System.out.println("Credit hours exceed the maximum 24.");
+            return;
         }
         switch (command) {
             case "AR":
@@ -117,10 +125,18 @@ public class TuitionManager {
     }
 
     private void removeStudent(Roster roster, String[] splitInput) {
+        if (splitInput.length < 3) {
+            System.out.println("Missing data in command line.");
+        }
         String name = splitInput[1];
         Major major = checkMajor(splitInput[2]);
         Student student = new Student(name, major);
-        roster.remove(student);
+        boolean isStudentRemoved = roster.remove(student);
+        if(!isStudentRemoved) {
+            System.out.println("Student is not in the roster.");
+        } else {
+            System.out.println("Student removed from the roster.");
+        }
     }
 
     private void calculateAllTuition(Roster roster) {
@@ -144,33 +160,80 @@ public class TuitionManager {
     private void payTuition(Roster roster, String[] splitInput) {
         if (splitInput.length < 3) {
             System.out.println("Missing data in command line.");
+            return;
         }
         String name = splitInput[1];
         Major major = checkMajor(splitInput[2]);
-        Student student = roster.retrieveStudent(new Student(name, major));
         if (splitInput.length < 4) {
             System.out.println("Payment amount missing.");
+            return;
         }
-        int payment = Integer.parseInt(splitInput[3]);
-        float amountDue = student.getAmountDue();
-        float totalPayment = student.getTotalPayment();
+        float payment = Float.parseFloat(splitInput[3]);
         if (payment <= 0) {
             System.out.println("Invalid amount.");
-        } else if (payment > amountDue) {
+            return;
+        }
+        Student student = roster.retrieveStudent(new Student(name, major));
+        if(student == null) {
+            System.out.println("Student not in the roster.");
+            return;
+        }
+        float amountDue = student.getAmountDue();
+        float totalPayment = student.getTotalPayment();
+        if (payment > amountDue) {
             System.out.println("Amount is greater than amount due.");
+            return;
         }
         if (splitInput.length < 5) {
             System.out.println("Payment date missing.");
+            return;
         }
         Date paymentDate = new Date(splitInput[4]);
         if (!paymentDate.isValid()) {
             System.out.println("Payment date invalid.");
+            return;
         }
         student.payTuition(payment, paymentDate);
     }
 
+    private void setStudentFinancialAid(Roster roster, String[] splitInput) {
+        if (splitInput.length < 3) {
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String name = splitInput[1];
+        Major major = checkMajor(splitInput[2]);
+        if (splitInput.length < 4) {
+            System.out.println("Missing the amount.");
+            return;
+        }
+        float aidAmount = Float.parseFloat(splitInput[3]);
+        if (aidAmount <= 0 || aidAmount > MAX_FINANCIAL_AID) {
+            System.out.println("Invalid amount.");
+            return;
+        }
+        Student student = roster.retrieveStudent(new Student(name, major));
+        if(student == null) {
+            System.out.println("Student not in roster.");
+            return;
+        } else if(student.getCredits() < 12) {
+            System.out.println("Parttime student doesn't qualify for the " +
+                    "award.");
+            return;
+        } else if(!(student instanceof Resident)) {
+            System.out.println("Not a resident student.");
+            return;
+        }
+        Resident resident = (Resident) student;
+        if(resident.getFinancialAid() != 0) {
+            System.out.println("Awarded once already.");
+            return;
+        }
+        resident.setFinancialAid(aidAmount);
+        System.out.println("Tuition updated.");
+    }
+
     private void printRoster(Roster roster) {
-        System.out.println("* list of students in the roster **");
         System.out.println(roster.toString());
     }
 
