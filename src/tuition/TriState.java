@@ -32,7 +32,7 @@ public class TriState extends NonResident {
 
     @Override
     public String toString() {
-        return super.toString() + ":non-resident(tri-state):" + state;
+        return super.toString() + "(tri-state):" + state;
     }
 
     public float getTuitionDue() {

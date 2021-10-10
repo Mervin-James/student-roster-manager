@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class TuitionManager {
     private static final int MIN_CREDITS = 3;
     private static final int MAX_CREDITS = 24;
+    private static final int MIN_CREDITS_INTERNATIONAL = 12;
     private static final int MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND = 3;
     private static final int MIN_NUM_ARGUMENTS_FOR_CREDIT_HOURS = 4;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT = 4;
@@ -118,6 +119,11 @@ public class TuitionManager {
                 isAdded = roster.add(triState);
             }
             case "AI" -> {
+                if (credits < MIN_CREDITS_INTERNATIONAL) {
+                    System.out.println("International students must enroll" +
+                            " at least 12 credits.");
+                    return;
+                }
                 International international = new International(name, major,
                         credits, false);
                 isAdded = roster.add(international);

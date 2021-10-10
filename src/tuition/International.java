@@ -82,7 +82,7 @@ public class International extends NonResident {
      */
     @Override
     public String toString() {
-        return super.toString() + (isStudyAbroad ? ":non-resident" +
-                ":international:study abroad" : "non-resident:international");
+        return super.toString() + (isStudyAbroad ? ":international:study " +
+                "abroad" : ":international");
     }
 }
