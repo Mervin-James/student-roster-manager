@@ -1,5 +1,6 @@
 package tuition;
 
+import javax.swing.text.SimpleAttributeSet;
 import java.util.Scanner;
 
 public class TuitionManager {
@@ -63,25 +64,31 @@ public class TuitionManager {
         } else if (credits < MIN_CREDITS) {
             System.out.println("Minimum credit hours is 3.");
         }
-//        else if(credits)
         switch (command) {
             case "AR":
                 Resident resident = new Resident(name, major, credits);
                 roster.add(resident);
                 break;
             case "AN":
-                NonResident nonResident =
-                        new NonResident(name, major, credits);
+                NonResident nonResident = new NonResident(name, major,
+                        credits);
                 roster.add(nonResident);
                 break;
             case "AT":
-                TriState triState =
-                        new TriState(name, major, credits, 1000f, State.NY);
+                State state = checkState(splitInput[4]);
+                float discount = 0;
+                if (state == State.NY) {
+                    discount = 4000;
+                } else if (state == State.CT) {
+                    discount = 5000;
+                }
+                TriState triState = new TriState(name, major, credits,
+                        discount, state);
                 roster.add(triState);
                 break;
             case "AI":
-                International international = new International("rob",
-                        Major.ME, 15, false);
+                International international = new International(name, major,
+                        credits, false);
                 roster.add(international);
                 break;
         }
@@ -90,19 +97,23 @@ public class TuitionManager {
 
     private Major checkMajor(String stringMajor) {
         stringMajor = stringMajor.toUpperCase();
-        if (stringMajor.equals("CS")) {
-            return Major.CS;
-        } else if (stringMajor.equals("IT")) {
-            return Major.IT;
-        } else if (stringMajor.equals("BA")) {
-            return Major.BA;
-        } else if (stringMajor.equals("EE")) {
-            return Major.EE;
-        } else if (stringMajor.equals("ME")) {
-            return Major.ME;
-        } else {
-            return null;
-        }
+        return switch (stringMajor) {
+            case "CS" -> Major.CS;
+            case "IT" -> Major.IT;
+            case "BA" -> Major.BA;
+            case "EE" -> Major.EE;
+            case "ME" -> Major.ME;
+            default -> null;
+        };
+    }
+
+    private State checkState(String stringState) {
+        stringState = stringState.toUpperCase();
+        return switch (stringState) {
+            case "NY" -> State.NY;
+            case "CT" -> State.CT;
+            default -> null;
+        };
     }
 
     private void removeStudent(Roster roster, String[] splitInput) {
