@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class TuitionManager {
     private static final int MIN_CREDITS = 3;
     private static final int MAX_CREDITS = 24;
-    private static final float MAX_FINANCIAL_AID = 10000;
     private static final int MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND = 3;
     private static final int MIN_NUM_ARGUMENTS_FOR_CREDIT_HOURS = 4;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT = 4;
@@ -36,9 +35,13 @@ public class TuitionManager {
             } else if (command.equals("S")) {
                 setStudyAbroad(roster, splitInput);
             } else if (command.equals("F")) {
-                setStudentFinancialAid(roster,splitInput);
+                setStudentFinancialAid(roster, splitInput);
             } else if (command.equals("P")) {
                 printRoster(roster);
+            } else if (command.equals("PN")) {
+                printRosterByName(roster);
+            } else if (command.equals("PT")) {
+                printRosterByPayment(roster);
             } else {
                 System.out.println("Command '" + command + "' not " +
                         "supported!");
@@ -212,10 +215,6 @@ public class TuitionManager {
             return;
         }
         float aidAmount = Float.parseFloat(splitInput[3]);
-//        if (aidAmount <= 0 || aidAmount > MAX_FINANCIAL_AID) {
-//            System.out.println("Invalid amount.");
-//            return;
-//        }
         Student student = roster.retrieveStudent(new Student(name, major));
         if (student == null) {
             System.out.println("Student not in roster.");
@@ -243,5 +242,13 @@ public class TuitionManager {
         System.out.println(roster.toString());
     }
 
+    private void printRosterByName(Roster roster) {
+        roster.sortByName();
+        printRoster(roster);
+    }
+
+    private void printRosterByPayment(Roster roster) {
+        roster.sortByPayment();
+    }
 
 }

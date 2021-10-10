@@ -19,6 +19,16 @@ public class Profile {
         return false;
     }
 
+    public int compareTo(Profile profile) {
+        if (this.name.equals(profile.name)) {
+            return 0;
+        } else if (this.name.compareTo(profile.name) < 0) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
     @Override
     public String toString() {
         return name + ":" + major;

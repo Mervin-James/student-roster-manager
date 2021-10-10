@@ -75,13 +75,52 @@ public class Roster {
         return roster[studentIndex];
     }
 
+    public void sortByName() {
+        for (int i = 0; i < size - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (roster[j].getProfile()
+                        .compareTo(roster[minIndex].getProfile()) ==
+                        -1) {
+                    minIndex = j;
+                }
+            }
+            Student tempAlbum = roster[minIndex];
+            roster[minIndex] = roster[i];
+            roster[i] = tempAlbum;
+        }
+    }
+
+    public void sortByPayment() {
+        int numStudents = 0;
+        for (int i = 0; i < size - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (roster[j].getLastPaymentDate() != null) {
+                    numStudents++;
+                    if (roster[j].getLastPaymentDate()
+                            .compareTo(roster[minIndex].getLastPaymentDate()) ==
+                            -1) {
+                        minIndex = j;
+                    }
+                }
+            }
+            Student tempAlbum = roster[minIndex];
+            roster[minIndex] = roster[i];
+            roster[i] = tempAlbum;
+        }
+        for (int i = 0; i < numStudents; i++) {
+            System.out.println(roster[i].toString());
+        }
+    }
+
     @Override
     public String toString() {
-        if(size == 0) {
+        if (size == 0) {
             return "Student roster is empty!";
         }
         String rosterList = "* list of students in the roster **\n";
-        for(int i=0; i<size; i++) {
+        for(int i = 0; i < size; i++) {
             rosterList += roster[i].toString() + "\n";
         }
         rosterList += "* end of roster **";
