@@ -9,8 +9,10 @@ package tuition;
  * payment amount, and number of credits attributes. This class
  * also contains getter methods for the Student's profile and amount due
  * attribute, in addition to a method for paying tuition. The Student class
- * also has methods to compare with other Student object and to generate a
+ * also has methods to compare with other Student objects and to generate a
  * String representation of this Student's information.
+ *
+ * @author Mervin James, Akshar Patel
  */
 public class Student {
     protected static final float UNIVERSITY_FEE = 3268;
@@ -57,8 +59,7 @@ public class Student {
     }
 
     /**
-     * Template method used to calculate the student's due payment.
-     * <p>
+     * Template method used to calculate the student's due tuition payment.
      * This method is expected to be overridden in all subclasses of Student.
      */
     public void tuitionDue() {
@@ -83,6 +84,7 @@ public class Student {
      * Determines if this Student and another object are equivalent.
      * If the object is a Student, the method compares the student's
      * profile attribute to the object's.
+     *
      * @param obj the object that this Student is being compared to.
      * @return true if both objects are Student objects with equivalent
      * profile attributes, false otherwise.
@@ -98,6 +100,7 @@ public class Student {
 
     /**
      * Getter method for this Student's profile attribute.
+     *
      * @return this Student's profile attribute.
      */
     public Profile getProfile() {
@@ -106,6 +109,7 @@ public class Student {
 
     /**
      * Getter method for this Student's credit hours attribute.
+     *
      * @return this Student's credits attribute.
      */
     public int getCredits() {
@@ -114,6 +118,7 @@ public class Student {
 
     /**
      * Setter method for this Student's credits attribute.
+     *
      * @param credits the number of credit hours that will set the credits
      *                attribute of this Student.
      */
@@ -123,6 +128,7 @@ public class Student {
 
     /**
      * Getter method for this Student's tuition attribute.
+     *
      * @return this Student's tuition attribute.
      */
     public float getTuition() {
@@ -131,6 +137,7 @@ public class Student {
 
     /**
      * Setter method for this Student's tuition attribute.
+     *
      * @param tuition the tuition amount that this Student's tuition
      *                attribute will be set to.
      */
@@ -140,6 +147,7 @@ public class Student {
 
     /**
      * Getter method for this Student's total payment attribute.
+     *
      * @return this Student's totalPayment attribute.
      */
     public float getTotalPayment() {
@@ -147,15 +155,8 @@ public class Student {
     }
 
     /**
-     * Getter method for this Student's date of last payment.
-     * @return this Student's lastPaymentDate attribute.
-     */
-    public Date getLastPaymentDate() {
-        return lastPaymentDate;
-    }
-
-    /**
      * Setter method for this Student's totalPayment attribute.
+     *
      * @param totalPayment this total payment amount that this Student's
      *                     totalPayment attribute will be set to.
      */
@@ -164,10 +165,30 @@ public class Student {
     }
 
     /**
+     * Getter method for this Student's date of last payment.
+     *
+     * @return this Student's lastPaymentDate attribute.
+     */
+    public Date getLastPaymentDate() {
+        return lastPaymentDate;
+    }
+
+    /**
+     * Setter method for this Student's lastPaymentDate attribute.
+     *
+     * @param lastPaymentDate the date of the Student's latest payment.
+     */
+    public void setLastPaymentDate(Date lastPaymentDate) {
+        this.lastPaymentDate = lastPaymentDate;
+    }
+
+    /**
      * Method to update the student's tuition payment information.
      * This method updates the student's total payment, amount due, and last
      * payment date information.
-     * @param payment the amount the student has paid towards their tuition.
+     *
+     * @param payment     the amount the student has paid towards their
+     *                    tuition.
      * @param paymentDate the date of the student's latest payment.
      */
     public void payTuition(float payment, Date paymentDate) {
@@ -178,18 +199,11 @@ public class Student {
 
     /**
      * Getter method for the amount due for the Student.
+     *
      * @return the Student's amountDue attribute.
      */
     public float getAmountDue() {
         return this.amountDue;
-    }
-
-    /**
-     * Setter method for this Student's lastPaymentDate attribute.
-     * @param lastPaymentDate the date of the Student's latest payment.
-     */
-    public void setLastPaymentDate(Date lastPaymentDate) {
-        this.lastPaymentDate = lastPaymentDate;
     }
 
 }
