@@ -4,6 +4,8 @@ package tuition;
  * A class that defines a Profile object by a student's name and major.
  * This class contains methods to compare with other Profile objects and to
  * generate a String representation of this Profile's information.
+ *
+ * @author Mervin James, Akshar Patel
  */
 public class Profile {
     private final String name;

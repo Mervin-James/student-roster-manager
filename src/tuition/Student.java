@@ -8,9 +8,9 @@ import java.text.DecimalFormat;
  * students in the roster, and has a template method called tuitionDue()
  * which is expected to be overridden in all subclasses. The Student class
  * also contains getter and setter methods for the Student's tuition, total
- * payment amount, and number of credits attributes. This class
- * also contains getter methods for the Student's profile and amount due
- * attribute, in addition to a method for paying tuition. The Student class
+ * payment amount, tuition amount due, and number of credits attributes. This
+ * class also contains getter methods for the Student's profile attribute,
+ * in addition to a method for paying tuition. The Student class
  * also has methods to compare with other Student objects and to generate a
  * String representation of this Student's information.
  *
@@ -208,6 +208,15 @@ public class Student {
      */
     public float getAmountDue() {
         return this.amountDue;
+    }
+
+    /**
+     * Setter method for this Student's amountDue attribute.
+     *
+     * @param amountDue the due tuition amount for the Student.
+     */
+    public void setAmountDue(float amountDue) {
+        this.amountDue = amountDue;
     }
 
 }
