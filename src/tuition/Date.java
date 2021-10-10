@@ -35,19 +35,6 @@ public class Date implements Comparable<Date> {
         year = Integer.parseInt(st.nextToken());
     } //take 'mm/dd/yyyy' and create a Date object
 
-//    /**
-//     * Copy constructor for the Date class which takes in a Date object.
-//     * This constructor is used to generate a new instance of a Date object
-//     * with the same attributes.
-//     *
-//     * @param date the Date object representation of the date of an album
-//     */
-//    public Date(Date date) {
-//        this.month = date.month;
-//        this.day = date.day;
-//        this.year = date.year;
-//    }
-
     /**
      * Default constructor for the Date class.
      * This constructor generates a Date object with today's month, day, and

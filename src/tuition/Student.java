@@ -1,22 +1,43 @@
 package tuition;
 
+/**
+ * A class that defines a Student by their profile and tuition information.
+ */
 public class Student {
     protected static final float UNIVERSITY_FEE = 3268;
     protected static final int FULL_TIME_BASE_RATE_MAX_CREDITS = 16;
     protected static final int FULL_TIME_BASE_RATE_MIN_CREDITS = 12;
     protected static final float PART_TIME_UNIVERSITY_FEE_MULTIPLIER = 0.8f;
-    private Profile profile;
+    private final Profile profile;
     private int credits;
     private float tuition;
     private float totalPayment;
     private Date lastPaymentDate;
     private float amountDue;
 
+    /**
+     * Constructs a Student object by their name and major.
+     *
+     * @param name  the name of the student.
+     * @param major the major of study the student is pursuing.
+     */
     public Student(String name, Major major) {
         Profile profile = new Profile(name, major);
         this.profile = profile;
+        this.credits = 0;
+        this.tuition = 0;
+        this.totalPayment = 0;
+        this.lastPaymentDate = null;
+        this.amountDue = 0;
     }
 
+    /**
+     * Constructs a Student by their name, major, and number of credits.
+     *
+     * @param name    the name of the student.
+     * @param major   the major of study the student is pursuing.
+     * @param credits the number of credits the student is attempting.
+     */
     public Student(String name, Major major, int credits) {
         this.profile = new Profile(name, major);
         this.credits = credits;
@@ -26,12 +47,19 @@ public class Student {
         this.amountDue = 0;
     }
 
-    public Student() {
-    }
-
+    /**
+     * Template method used to calculate the student's due payment.
+     * <p>
+     * This method is expected to be overridden in all subclasses of Student.
+     */
     public void tuitionDue() {
     }
 
+    /**
+     * Generates a String representation of this Student object.
+     *
+     * @return the String representation of this Student object.
+     */
     @Override
     public String toString() {
         return profile + ":" + credits + " credit hours" +
@@ -42,6 +70,14 @@ public class Student {
                 lastPaymentDate.toString());
     }
 
+    /**
+     * Determines if this Student and another object are equivalent.
+     * If the object is a Student, the method compares the student's
+     * profile attribute to the object's.
+     * @param obj the object that this Student is being compared to.
+     * @return true if both objects are Student objects with equivalent
+     * profile attributes, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Student) {
@@ -55,44 +91,86 @@ public class Student {
         return profile;
     }
 
+    /**
+     * Getter method for this Student's credit hours attribute.
+     * @return this Student's credits attribute.
+     */
     public int getCredits() {
         return this.credits;
     }
 
+    /**
+     * Setter method for this Student's credits attribute.
+     * @param credits the number of credit hours that will set the credits
+     *                attribute of this Student.
+     */
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    /**
+     * Getter method for this Student's tuition attribute.
+     * @return this Student's tuition attribute.
+     */
     public float getTuition() {
         return this.tuition;
     }
 
-    public float getTotalPayment() {
-        return this.totalPayment;
+    /**
+     * Setter method for this Student's tuition attribute.
+     * @param tuition the tuition amount that this Student's tuition
+     *                attribute will be set to.
+     */
+    public void setTuition(float tuition) {
+        this.tuition = tuition;
     }
 
-    public float getAmountDue() {
-        return this.amountDue;
+    /**
+     * Getter method for this Student's total payment attribute.
+     * @return this Student's totalPayment attribute.
+     */
+    public float getTotalPayment() {
+        return this.totalPayment;
     }
 
     public Date getLastPaymentDate() {
         return lastPaymentDate;
     }
 
-    public void setCredits(int credits) {
-        this.credits = credits;
-    }
-
-    public void setTuition(float tuition) {
-        this.tuition = tuition;
-    }
-
+    /**
+     * Setter method for this Student's totalPayment attribute.
+     * @param totalPayment this total payment amount that this Student's
+     *                     totalPayment attribute will be set to.
+     */
     public void setTotalPayment(float totalPayment) {
         this.totalPayment = totalPayment;
     }
 
+    /**
+     * Method to update the student's tuition payment information.
+     * This method updates the student's total payment, amount due, and last
+     * payment date information.
+     * @param payment the amount the student has paid towards their tuition.
+     * @param paymentDate the date of the student's latest payment.
+     */
     public void payTuition(float payment, Date paymentDate) {
         this.totalPayment += payment;
         this.amountDue = this.tuition - this.totalPayment;
         this.lastPaymentDate = paymentDate;
     }
 
+    /**
+     * Getter method for the amount due for the Student.
+     * @return the Student's amountDue attribute.
+     */
+    public float getAmountDue() {
+        return this.amountDue;
+    }
+
+    /**
+     * Setter method for this Student's lastPaymentDate attribute.
+     * @param lastPaymentDate the date of the Student's latest payment.
+     */
     public void setLastPaymentDate(Date lastPaymentDate) {
         this.lastPaymentDate = lastPaymentDate;
     }
