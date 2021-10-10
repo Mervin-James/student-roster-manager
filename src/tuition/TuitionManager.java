@@ -212,10 +212,6 @@ public class TuitionManager {
             return;
         }
         float aidAmount = Float.parseFloat(splitInput[3]);
-//        if (aidAmount <= 0 || aidAmount > MAX_FINANCIAL_AID) {
-//            System.out.println("Invalid amount.");
-//            return;
-//        }
         Student student = roster.retrieveStudent(new Student(name, major));
         if (student == null) {
             System.out.println("Student not in roster.");
