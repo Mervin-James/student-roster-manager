@@ -5,7 +5,6 @@ public class Resident extends Student {
     private static final float FULL_TIME_TUITION_FEE = 12536;
     private static final float RATE_PER_CREDIT_HOUR = 404;
     private float financialAid;
-//    private float amountDue;
 
     public Resident(String name, Major major, int credits) {
         super(name, major, credits);
