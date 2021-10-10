@@ -1,5 +1,7 @@
 package tuition;
 
+import java.text.DecimalFormat;
+
 /**
  * A class that defines a Student by their profile and tuition information.
  * The Student class is the superclass for all the different types of
@@ -71,9 +73,11 @@ public class Student {
      */
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         return profile + ":" + credits + " credit hours" +
-                ":" + "tuition due:" + amountDue + ":" + "total " +
-                "payment:" + totalPayment + ":" + "last payment date:" +
+                ":" + "tuition due:" + df.format(amountDue) + ":" + "total " +
+                "payment:" + df.format(totalPayment) + ":" + "last payment " +
+                "date:" +
                 " " + (lastPaymentDate == null ?
                 "--/--/--" :
                 lastPaymentDate.toString());

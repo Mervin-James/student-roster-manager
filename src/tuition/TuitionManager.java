@@ -8,6 +8,7 @@ public class TuitionManager {
     private static final int MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND = 3;
     private static final int MIN_NUM_ARGUMENTS_FOR_CREDIT_HOURS = 4;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT = 4;
+    private static final int MIN_NUM_ARGUMENTS_FOR_TRISTATE = 5;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_DATE = 5;
 
     public void run() {
@@ -22,7 +23,7 @@ public class TuitionManager {
             if (command.equals("Q")) {
                 break;
             } else if (command.equals("AR") || command.equals("AN") ||
-                    command.equals("AI")) {
+                    command.equals("AT") || command.equals("AI")) {
                 addStudent(roster, splitInput);
             } else if (command.equals("R")) {
                 removeStudent(roster, splitInput);
@@ -87,17 +88,25 @@ public class TuitionManager {
         }
         boolean isAdded = false;
         switch (command) {
-            case "AR":
+            case "AR" -> {
                 Resident resident = new Resident(name, major, credits);
                 isAdded = roster.add(resident);
-                break;
-            case "AN":
+            }
+            case "AN" -> {
                 NonResident nonResident = new NonResident(name, major,
                         credits);
                 isAdded = roster.add(nonResident);
-                break;
-            case "AT":
+            }
+            case "AT" -> {
+                if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_TRISTATE) {
+                    System.out.println("Missing data in command line.");
+                    return;
+                }
                 State state = checkState(splitInput[4]);
+                if (state == null) {
+                    System.out.println("Not part of the tri-state area.");
+                    return;
+                }
                 float discount = 0;
                 if (state == State.NY) {
                     discount = 4000;
@@ -107,12 +116,12 @@ public class TuitionManager {
                 TriState triState = new TriState(name, major, credits,
                         discount, state);
                 isAdded = roster.add(triState);
-                break;
-            case "AI":
+            }
+            case "AI" -> {
                 International international = new International(name, major,
                         credits, false);
                 isAdded = roster.add(international);
-                break;
+            }
         }
         if (isAdded) {
             System.out.println("Student added.");

@@ -93,6 +93,9 @@ public class Roster {
     }
 
     public void sortByPayment() {
+        if (size == 0) {
+            System.out.println("Student roster is empty!");
+        }
         int numStudents = 0;
         for (int i = 0; i < size - 1; i++) {
             int minIndex = i;
