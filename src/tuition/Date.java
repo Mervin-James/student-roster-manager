@@ -13,9 +13,9 @@ import java.util.StringTokenizer;
  * @author Akshar Patel, Mervin James
  */
 public class Date implements Comparable<Date> {
-    public static final int QUADRENNIAL = 4;
-    public static final int CENTENNIAL = 100;
-    public static final int QUATERCENTENNIAL = 400;
+//    public static final int QUADRENNIAL = 4;
+//    public static final int CENTENNIAL = 100;
+//    public static final int QUATERCENTENNIAL = 400;
     public static final int CURRENT_YEAR = 2021;
     private final int year;
     private final int month;
@@ -67,7 +67,7 @@ public class Date implements Comparable<Date> {
         if (this.year != CURRENT_YEAR) {
             return false;
         }
-        if (this.compareTo(today()) == 1) {
+        if (this.compareTo(today()) >= 0) {
             return false;
         }
         if (this.month < 1 || this.day < 1 || this.year < 1) {
@@ -81,21 +81,9 @@ public class Date implements Comparable<Date> {
                 this.month == 11) {
             return this.day <= 30;
         } else if (this.month == 2) {
-            if (this.year % QUADRENNIAL == 0) {
-                if (this.year % CENTENNIAL == 0) {
-                    if (this.year % QUATERCENTENNIAL == 0) {
-                        return this.day <= 29;
-                    }
-                } else {
-                    return this.day <= 29;
-                }
-            } else {
-                return this.day <= 28;
-            }
-        } else {
-            return false;
+            return this.day <= 28;
         }
-        return true;
+        return false;
     }
 
     /**
