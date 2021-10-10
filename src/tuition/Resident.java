@@ -11,7 +11,7 @@ public class Resident extends Student {
         super(name, major, credits);
     }
 
-    private boolean isFinancialAidValid(float financialAid) {
+    public boolean isFinancialAidValid(float financialAid) {
         if (financialAid > MAX_FINANCIAL_AID || financialAid < 0) {
             System.out.println("Invalid amount.");
             return false;

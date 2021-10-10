@@ -208,29 +208,31 @@ public class TuitionManager {
             return;
         }
         float aidAmount = Float.parseFloat(splitInput[3]);
-        if (aidAmount <= 0 || aidAmount > MAX_FINANCIAL_AID) {
-            System.out.println("Invalid amount.");
-            return;
-        }
+//        if (aidAmount <= 0 || aidAmount > MAX_FINANCIAL_AID) {
+//            System.out.println("Invalid amount.");
+//            return;
+//        }
         Student student = roster.retrieveStudent(new Student(name, major));
-        if(student == null) {
+        if (student == null) {
             System.out.println("Student not in roster.");
             return;
-        } else if(student.getCredits() < 12) {
+        } else if (student.getCredits() < 12) {
             System.out.println("Parttime student doesn't qualify for the " +
                     "award.");
             return;
-        } else if(!(student instanceof Resident)) {
+        } else if (!(student instanceof Resident)) {
             System.out.println("Not a resident student.");
             return;
         }
         Resident resident = (Resident) student;
-        if(resident.getFinancialAid() != 0) {
+        if (resident.getFinancialAid() != 0) {
             System.out.println("Awarded once already.");
             return;
         }
-        resident.setFinancialAid(aidAmount);
-        System.out.println("Tuition updated.");
+        if (resident.isFinancialAidValid(aidAmount)) {
+            resident.setFinancialAid(aidAmount);
+            System.out.println("Tuition updated.");
+        }
     }
 
     private void printRoster(Roster roster) {
