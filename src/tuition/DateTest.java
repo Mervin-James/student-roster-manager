@@ -43,7 +43,7 @@ public class DateTest {
 
         //test case #9: a date with valid year, month in January, and
         // invalid day should be invalid.
-        date = new Date("1/1/2021");
+        date = new Date("1/32/2021");
         assertFalse(date.isValid());
 
         //test case #10: a date with valid year, month in January, and
@@ -146,32 +146,13 @@ public class DateTest {
         date = new Date("10/32/2021");
         assertFalse(date.isValid());
 
-        //test case #30: a date with valid year, month in October, and
-        // day less than or equal to 31 should be valid.
-        date = new Date("10/31/2021");
+        //test case #30: a date preceding the current date (10/10/2021) and
+        // with valid year, month in October, and day less than or equal to
+        // 31 should be valid.
+        date = new Date("10/9/2021");
         assertTrue(date.isValid());
 
-        //test case #31: a date with valid year, month in November, and
-        // invalid day should be invalid.
-        date = new Date("11/31/2021");
-        assertFalse(date.isValid());
-
-        //test case #32: a date with valid year, month in November, and
-        // day less than or equal to 30 should be valid.
-        date = new Date("11/30/2021");
-        assertTrue(date.isValid());
-
-        //test case #33: a date with valid year, month in December, and
-        // invalid day should be invalid.
-        date = new Date("12/32/2021");
-        assertFalse(date.isValid());
-
-        //test case #34: a date with valid year, month in December, and
-        // day less than or equal to 31 should be valid.
-        date = new Date("12/31/2021");
-        assertTrue(date.isValid());
-
-        //test case #35: a date with a year after 2021 should be invalid.
+        //test case #31: a date with a year after 2021 should be invalid.
         date = new Date("1/1/2022");
         assertFalse(date.isValid());
     }
