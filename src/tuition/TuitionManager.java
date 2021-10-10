@@ -26,6 +26,8 @@ public class TuitionManager {
                 calculateAllTuition(roster);
             } else if (command.equals("T")) {
                 payTuition(roster, splitInput);
+            } else if (command.equals("S")) {
+                setStudyAbroad(roster, splitInput);
             } else if (command.equals("P") && splitInput.length == 1) {
                 printRoster(roster);
             } else {
@@ -109,6 +111,15 @@ public class TuitionManager {
     private void calculateAllTuition(Roster roster) {
         roster.calculateAllTuition();
         System.out.println("Calculation completed.");
+    }
+
+    private void setStudyAbroad(Roster roster, String[] splitInput) {
+        String name = splitInput[1];
+        Major major = checkMajor(splitInput[2]);
+        int credits = Integer.parseInt(splitInput[3]);
+        Student student = roster.retrieveStudent(new Student(name, major));
+        ((International) student).setStudyAbroadStatus(name, major, credits,
+                true);
     }
 
     private void payTuition(Roster roster, String[] splitInput) {
