@@ -28,7 +28,11 @@ public class TuitionManager {
                 payTuition(roster, splitInput);
             } else if (command.equals("S")) {
                 setStudyAbroad(roster, splitInput);
-            } else if (command.equals("P") && splitInput.length == 1) {
+
+            } else if (command.equals("F")) {
+
+            }
+            else if (command.equals("P") && splitInput.length == 1) {
                 printRoster(roster);
             } else {
                 System.out.println("Command '" + command + "' not " +
@@ -118,8 +122,12 @@ public class TuitionManager {
         Major major = checkMajor(splitInput[2]);
         int credits = Integer.parseInt(splitInput[3]);
         Student student = roster.retrieveStudent(new Student(name, major));
-        ((International) student).setStudyAbroadStatus(name, major, credits,
-                true);
+        if (student == null) {
+            System.out.println("Couldn't find the international student.");
+        } else {
+            ((International) student).setStudyAbroadStatus(name, major, credits,
+                    true);
+        }
     }
 
     private void payTuition(Roster roster, String[] splitInput) {
