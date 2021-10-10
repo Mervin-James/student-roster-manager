@@ -43,10 +43,6 @@ public class Resident extends Student {
         return super.toString() + ":resident";
     }
 
-    public float getTuitionDue() {
-        return this.amountDue;
-    }
-
     public float getFinancialAid() {
         return this.financialAid;
     }

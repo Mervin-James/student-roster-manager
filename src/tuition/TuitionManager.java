@@ -7,6 +7,10 @@ public class TuitionManager {
     private static final int MIN_CREDITS = 3;
     private static final int MAX_CREDITS = 24;
     private static final float MAX_FINANCIAL_AID = 10000;
+    private static final int MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND = 3;
+    private static final int MIN_NUM_ARGUMENTS_FOR_CREDIT_HOURS = 4;
+    private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT = 4;
+    private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_DATE = 5;
 
     public void run() {
         System.out.println("Tuition Manager starts running.");
@@ -18,12 +22,12 @@ public class TuitionManager {
             String input = sc.nextLine();
             String[] splitInput = input.split(",");
             command = splitInput[0];
-            if (command.equals("Q") && splitInput.length == 1) {
+            if (command.equals("Q")) {
                 break;
             } else if (command.equals("AR") || command.equals("AN") ||
                     command.equals("AI")) {
                 addStudent(roster, splitInput);
-            } else if (command.equals("R") && splitInput.length == 1) {
+            } else if (command.equals("R")) {
                 removeStudent(roster, splitInput);
             } else if (command.equals("C")) {
                 calculateAllTuition(roster);
@@ -33,7 +37,7 @@ public class TuitionManager {
                 setStudyAbroad(roster, splitInput);
             } else if (command.equals("F")) {
                 setStudentFinancialAid(roster,splitInput);
-            } else if (command.equals("P") && splitInput.length == 1) {
+            } else if (command.equals("P")) {
                 printRoster(roster);
             } else {
                 System.out.println("Command '" + command + "' not " +
@@ -45,7 +49,7 @@ public class TuitionManager {
     }
 
     private void addStudent(Roster roster, String[] splitInput) {
-        if (splitInput.length < 3) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
             return;
         }
@@ -57,7 +61,7 @@ public class TuitionManager {
                     "'" + splitInput[2] + "' is not a valid major.");
             return;
         }
-        if (splitInput.length < 4) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_CREDIT_HOURS) {
             System.out.println("Credit hours missing.");
             return;
         }
@@ -125,7 +129,7 @@ public class TuitionManager {
     }
 
     private void removeStudent(Roster roster, String[] splitInput) {
-        if (splitInput.length < 3) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
         }
         String name = splitInput[1];
@@ -158,13 +162,13 @@ public class TuitionManager {
     }
 
     private void payTuition(Roster roster, String[] splitInput) {
-        if (splitInput.length < 3) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
             return;
         }
         String name = splitInput[1];
         Major major = checkMajor(splitInput[2]);
-        if (splitInput.length < 4) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT) {
             System.out.println("Payment amount missing.");
             return;
         }
@@ -184,7 +188,7 @@ public class TuitionManager {
             System.out.println("Amount is greater than amount due.");
             return;
         }
-        if (splitInput.length < 5) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_PAYMENT_DATE) {
             System.out.println("Payment date missing.");
             return;
         }
@@ -197,13 +201,13 @@ public class TuitionManager {
     }
 
     private void setStudentFinancialAid(Roster roster, String[] splitInput) {
-        if (splitInput.length < 3) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
             return;
         }
         String name = splitInput[1];
         Major major = checkMajor(splitInput[2]);
-        if (splitInput.length < 4) {
+        if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT) {
             System.out.println("Missing the amount.");
             return;
         }
