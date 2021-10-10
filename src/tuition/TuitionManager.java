@@ -154,13 +154,12 @@ public class TuitionManager {
     private void setStudyAbroad(Roster roster, String[] splitInput) {
         String name = splitInput[1];
         Major major = checkMajor(splitInput[2]);
-        int credits = Integer.parseInt(splitInput[3]);
+        boolean isStudyAbroad = Boolean.parseBoolean(splitInput[3]);
         Student student = roster.retrieveStudent(new Student(name, major));
         if (student == null) {
             System.out.println("Couldn't find the international student.");
         } else {
-            ((International) student).setStudyAbroadStatus(name, major, credits,
-                    true);
+            ((International) student).setStudyAbroadStatus(isStudyAbroad);
         }
     }
 

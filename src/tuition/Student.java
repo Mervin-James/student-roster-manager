@@ -10,7 +10,7 @@ package tuition;
  * also contains getter methods for the Student's profile and amount due
  * attribute, in addition to a method for paying tuition. The Student class
  * also has methods to compare with other Student object and to generate a
- * String representation of this Student.
+ * String representation of this Student's information.
  */
 public class Student {
     protected static final float UNIVERSITY_FEE = 3268;
