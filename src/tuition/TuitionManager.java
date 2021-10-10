@@ -1,6 +1,5 @@
 package tuition;
 
-import javax.swing.text.SimpleAttributeSet;
 import java.util.Scanner;
 
 public class TuitionManager {
@@ -16,11 +15,10 @@ public class TuitionManager {
         Student[] students = new Student[4];
         Roster roster = new Roster(students);
         Scanner sc = new Scanner(System.in);
-        String command = "";
         while (true) {
             String input = sc.nextLine();
             String[] splitInput = input.split(",");
-            command = splitInput[0];
+            String command = splitInput[0];
             if (command.equals("Q")) {
                 break;
             } else if (command.equals("AR") || command.equals("AN") ||
@@ -42,6 +40,8 @@ public class TuitionManager {
                 printRosterByName(roster);
             } else if (command.equals("PT")) {
                 printRosterByPayment(roster);
+            } else if (command.equals("")) {
+                System.out.println();
             } else {
                 System.out.println("Command '" + command + "' not " +
                         "supported!");
@@ -68,7 +68,13 @@ public class TuitionManager {
             System.out.println("Credit hours missing.");
             return;
         }
-        int credits = Integer.parseInt(splitInput[3]);
+        int credits = 0;
+        try {
+            credits = Integer.parseInt(splitInput[3]);
+        } catch (NumberFormatException ex){
+            System.out.println("Invalid credit hours.");
+            return;
+        }
         if (credits < 0) {
             System.out.println("Credit hours cannot be negative.");
             return;
@@ -79,15 +85,16 @@ public class TuitionManager {
             System.out.println("Credit hours exceed the maximum 24.");
             return;
         }
+        boolean isAdded = false;
         switch (command) {
             case "AR":
                 Resident resident = new Resident(name, major, credits);
-                roster.add(resident);
+                isAdded = roster.add(resident);
                 break;
             case "AN":
                 NonResident nonResident = new NonResident(name, major,
                         credits);
-                roster.add(nonResident);
+                isAdded = roster.add(nonResident);
                 break;
             case "AT":
                 State state = checkState(splitInput[4]);
@@ -99,15 +106,17 @@ public class TuitionManager {
                 }
                 TriState triState = new TriState(name, major, credits,
                         discount, state);
-                roster.add(triState);
+                isAdded = roster.add(triState);
                 break;
             case "AI":
                 International international = new International(name, major,
                         credits, false);
-                roster.add(international);
+                isAdded = roster.add(international);
                 break;
         }
-        System.out.println("Student added.");
+        if (isAdded) {
+            System.out.println("Student added.");
+        }
     }
 
     private Major checkMajor(String stringMajor) {

@@ -29,6 +29,7 @@ public class Roster {
 
     public boolean add(Student student) {
         if(find(student) != -1) {
+            System.out.println("Student is already in the roster.");
             return false;
         }
         roster[size++] = student;
