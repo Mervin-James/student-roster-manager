@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
  * @author Akshar Patel, Mervin James
  */
 public class Date implements Comparable<Date> {
-//    public static final int QUADRENNIAL = 4;
+    //    public static final int QUADRENNIAL = 4;
 //    public static final int CENTENNIAL = 100;
 //    public static final int QUATERCENTENNIAL = 400;
     public static final int CURRENT_YEAR = 2021;

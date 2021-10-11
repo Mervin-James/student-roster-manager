@@ -15,13 +15,13 @@ public class TriState extends NonResident {
     /**
      * Constructs a Tristate object by name, major, credits, discount, state.
      *
-     * @param name the name of the Tristate student.
-     * @param major the major of study of the Tristate student.
-     * @param credits the number of credits the Tristate student is
-     *                attempting.
+     * @param name     the name of the Tristate student.
+     * @param major    the major of study of the Tristate student.
+     * @param credits  the number of credits the Tristate student is
+     *                 attempting.
      * @param discount the discount the Tristate student receives due to
      *                 residing in the Tristate area.
-     * @param state the state the Tristate student is residing in.
+     * @param state    the state the Tristate student is residing in.
      */
     public TriState(String name, Major major, int credits, float discount,
                     State state) {

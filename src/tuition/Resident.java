@@ -19,8 +19,9 @@ public class Resident extends Student {
 
     /**
      * Constructs a Resident object by their name, major, and credits.
-     * @param name the name of the Resident student.
-     * @param major the major of study of the Resident student.
+     *
+     * @param name    the name of the Resident student.
+     * @param major   the major of study of the Resident student.
      * @param credits the number of credits the Resident student is
      *                attempting.
      */
@@ -69,6 +70,7 @@ public class Resident extends Student {
 
     /**
      * Getter method for this Resident Student's financial aid attribute.
+     *
      * @return this Resident student's financialAid attribute.
      */
     public float getFinancialAid() {
@@ -77,6 +79,7 @@ public class Resident extends Student {
 
     /**
      * Setter method for this Resident student's financialAid attribute.
+     *
      * @param financialAid the amount of financial aid for this Resident
      *                     student.
      */

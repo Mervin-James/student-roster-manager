@@ -72,7 +72,7 @@ public class TuitionManager {
      * on the user's input into the command line. This method then prints
      * whether the user input is valid.
      *
-     * @param roster the roster of students.
+     * @param roster     the roster of students.
      * @param splitInput the user's input from the command line separated
      *                   into fields for the album being added.
      */
@@ -198,7 +198,7 @@ public class TuitionManager {
     /**
      * Removes student from roster based on given name and major.
      *
-     * @param roster the roster of students.
+     * @param roster     the roster of students.
      * @param splitInput the user's input from the command line separated
      *                   into fields for the album being added.
      */
@@ -230,7 +230,7 @@ public class TuitionManager {
     /**
      * Sets study abroad status to the status given by the user.
      *
-     * @param roster the roster of students.
+     * @param roster     the roster of students.
      * @param splitInput the user's input from the command line separated
      *                   into fields for the album being added.
      */
@@ -250,7 +250,7 @@ public class TuitionManager {
      * Updates a student's tuition based on a given payment amount and
      * payment date.
      *
-     * @param roster the roster of students.
+     * @param roster     the roster of students.
      * @param splitInput the user's input from the command line separated
      *                   into fields for the album being added.
      */
@@ -297,7 +297,7 @@ public class TuitionManager {
      * Sets the financial aid for a Resident student given a financial aid
      * amount.
      *
-     * @param roster the roster of students.
+     * @param roster     the roster of students.
      * @param splitInput the user's input from the command line separated
      *                   into fields for the album being added.
      */
@@ -355,7 +355,7 @@ public class TuitionManager {
      * @param roster the roster of students.
      */
     private void printRosterByName(Roster roster) {
-        System.out.println(roster.printByName());
+        System.out.println(roster.toStringByName());
     }
 
     /**
@@ -364,7 +364,7 @@ public class TuitionManager {
      * @param roster the roster of students.
      */
     private void printRosterByPayment(Roster roster) {
-        System.out.println(roster.printByPayment());
+        System.out.println(roster.toStringByPayment());
     }
 
 }

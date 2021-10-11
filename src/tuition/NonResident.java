@@ -14,8 +14,9 @@ public class NonResident extends Student {
 
     /**
      * Constructs a Nonresident object by their name, major, and credits.
-     * @param name the name of the Nonresident student.
-     * @param major the major of study the Nonresident student is pursuing.
+     *
+     * @param name    the name of the Nonresident student.
+     * @param major   the major of study the Nonresident student is pursuing.
      * @param credits the number of credits the Nonresident student is
      *                attempting.
      */
@@ -49,6 +50,7 @@ public class NonResident extends Student {
 
     /**
      * Generates a String representation of this Nonresident student object.
+     *
      * @return the String representation of this Nonresident student object.
      */
     @Override
