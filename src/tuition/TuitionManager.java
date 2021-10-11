@@ -2,6 +2,11 @@ package tuition;
 
 import java.util.Scanner;
 
+/**
+ * A class that runs the program and accepts a user's command line arguments.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class TuitionManager {
     private static final int MIN_CREDITS = 3;
     private static final int MAX_CREDITS = 24;
@@ -15,6 +20,11 @@ public class TuitionManager {
     private static final int MIN_NUM_ARGUMENTS_FOR_INTERNATIONAL = 5;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_DATE = 5;
 
+    /**
+     * Runs the program and accepts a user's command line arguments.
+     * The program takes in the user's input and generates the correct
+     * output. The program will terminate once the user enters 'Q'.
+     */
     public void run() {
         System.out.println("Tuition Manager starts running.");
         Student[] students = new Student[4];
@@ -56,6 +66,16 @@ public class TuitionManager {
         System.out.println("\nTuition Manager terminated.");
     }
 
+    /**
+     * Adds a student to the roster based on the user's input.
+     * This method validates the user's input and creates a new Student based
+     * on the user's input into the command line. This method then prints
+     * whether the user input is valid.
+     *
+     * @param roster the roster of students.
+     * @param splitInput the user's input from the command line separated
+     *                   into fields for the album being added.
+     */
     private void addStudent(Roster roster, String[] splitInput) {
         if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
@@ -142,6 +162,12 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * Checks if a student's given major is a valid major.
+     *
+     * @param stringMajor the string version of major given by user
+     * @return the major of a given student
+     */
     private Major checkMajor(String stringMajor) {
         stringMajor = stringMajor.toUpperCase();
         return switch (stringMajor) {
@@ -154,6 +180,12 @@ public class TuitionManager {
         };
     }
 
+    /**
+     * Checks if a student's given state is a valid state.
+     *
+     * @param stringState the string version of state given by user
+     * @return the state of a given student
+     */
     private State checkState(String stringState) {
         stringState = stringState.toUpperCase();
         return switch (stringState) {
@@ -163,6 +195,13 @@ public class TuitionManager {
         };
     }
 
+    /**
+     * Removes student from roster based on given name and major.
+     *
+     * @param roster the roster of students.
+     * @param splitInput the user's input from the command line separated
+     *                   into fields for the album being added.
+     */
     private void removeStudent(Roster roster, String[] splitInput) {
         if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
@@ -178,11 +217,23 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * Calculates the tuition for each student in the roster.
+     *
+     * @param roster the roster of students.
+     */
     private void calculateAllTuition(Roster roster) {
         roster.calculateAllTuition();
         System.out.println("Calculation completed.");
     }
 
+    /**
+     * Sets study abroad status to the status given by the user.
+     *
+     * @param roster the roster of students.
+     * @param splitInput the user's input from the command line separated
+     *                   into fields for the album being added.
+     */
     private void setStudyAbroad(Roster roster, String[] splitInput) {
         String name = splitInput[1];
         Major major = checkMajor(splitInput[2]);
@@ -195,6 +246,14 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * Updates a student's tuition based on a given payment amount and
+     * payment date.
+     *
+     * @param roster the roster of students.
+     * @param splitInput the user's input from the command line separated
+     *                   into fields for the album being added.
+     */
     private void payTuition(Roster roster, String[] splitInput) {
         if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
@@ -234,6 +293,14 @@ public class TuitionManager {
         student.payTuition(payment, paymentDate);
     }
 
+    /**
+     * Sets the financial aid for a Resident student given a financial aid
+     * amount.
+     *
+     * @param roster the roster of students.
+     * @param splitInput the user's input from the command line separated
+     *                   into fields for the album being added.
+     */
     private void setStudentFinancialAid(Roster roster, String[] splitInput) {
         if (splitInput.length < MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND) {
             System.out.println("Missing data in command line.");
@@ -263,8 +330,8 @@ public class TuitionManager {
             System.out.println("Awarded once already.");
             return;
         }
-        if (resident.getFinancialAid() > MIN_FINANCIAL_AID &&
-                resident.getFinancialAid() < MAX_FINANCIAL_AID) {
+        if (aidAmount > MIN_FINANCIAL_AID &&
+                aidAmount < MAX_FINANCIAL_AID) {
             resident.setFinancialAid(aidAmount);
             System.out.println("Tuition updated.");
         } else {
@@ -272,14 +339,30 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * Prints all the students in the roster.
+     *
+     * @param roster the roster of students.
+     */
     private void printRoster(Roster roster) {
         System.out.println(roster.toString());
     }
 
+    /**
+     * Prints all the students in the roster sorted in alphabetical order
+     * by name.
+     *
+     * @param roster the roster of students.
+     */
     private void printRosterByName(Roster roster) {
         System.out.println(roster.printByName());
     }
 
+    /**
+     * Prints the students who have made a payment by ascending payment date.
+     *
+     * @param roster the roster of students.
+     */
     private void printRosterByPayment(Roster roster) {
         System.out.println(roster.printByPayment());
     }
