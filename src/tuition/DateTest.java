@@ -2,8 +2,16 @@ package tuition;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class that conducts a JUnit test on isValid() from the Date class.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class DateTest {
 
+    /**
+     * Conducts a JUnit test on isValid() from the Date class.
+     */
     @org.junit.Test
     public void isValid() {
         //test case #1: a date with a year before 2021 should be invalid.
