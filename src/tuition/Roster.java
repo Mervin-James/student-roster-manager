@@ -1,9 +1,9 @@
 package tuition;
 
 public class Roster {
+    private static final int NOT_FOUND = -1;
     private Student[] roster;
     private int size; //keep track of the number of students in the roster
-    private static final int NOT_FOUND = -1;
 
     public Roster(Student[] roster) {
         this.roster = roster;
@@ -11,8 +11,8 @@ public class Roster {
     }
 
     private int find(Student student) {
-        for(int i = 0; i < size; i++) {
-            if(roster[i].equals(student)) {
+        for (int i = 0; i < size; i++) {
+            if (roster[i].equals(student)) {
                 return i;
             }
         }
@@ -28,12 +28,12 @@ public class Roster {
     }
 
     public boolean add(Student student) {
-        if(find(student) != -1) {
+        if (find(student) != -1) {
             System.out.println("Student is already in the roster.");
             return false;
         }
         roster[size++] = student;
-        if(size == roster.length) {
+        if (size == roster.length) {
             grow();
         }
         return true;
@@ -47,12 +47,12 @@ public class Roster {
         Student[] newRoster = new Student[size];
         boolean isSkipped = false;  //marks when the deleted student has
         // been skipped
-        for(int i = 0; i < size; i++) {
-            if(i == studentIndex) {
+        for (int i = 0; i < size; i++) {
+            if (i == studentIndex) {
                 isSkipped = true;
             }
-            if(isSkipped) {
-                newRoster[i] = roster[i+1];
+            if (isSkipped) {
+                newRoster[i] = roster[i + 1];
                 continue;
             }
             newRoster[i] = roster[i];
@@ -63,14 +63,14 @@ public class Roster {
     }
 
     public void calculateAllTuition() {
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             roster[i].tuitionDue();
         }
     }
 
     public Student retrieveStudent(Student student) {
         int studentIndex = find(student);
-        if(studentIndex == NOT_FOUND) {
+        if (studentIndex == NOT_FOUND) {
             return null;
         }
         return roster[studentIndex];
@@ -97,21 +97,37 @@ public class Roster {
             System.out.println("Student roster is empty!");
         }
         int numStudents = 0;
-        for (int i = 0; i < size - 1; i++) {
+        beginSorting: for (int i = 0; i < size - 1; i++) {
             int minIndex = i;
-            for (int j = i + 1; j < size; j++) {
-                if (roster[j].getLastPaymentDate() != null) {
-                    numStudents++;
-                    if (roster[j].getLastPaymentDate()
-                            .compareTo(roster[minIndex].getLastPaymentDate()) ==
-                            -1) {
-                        minIndex = j;
+            if (roster[i].getLastPaymentDate() != null) {
+                for (int j = i + 1; j < size; j++) {
+                    if (roster[j].getLastPaymentDate() != null) {
+                        numStudents++;
+                        if (roster[j].getLastPaymentDate()
+                                .compareTo(roster[minIndex].getLastPaymentDate()) ==
+                                -1) {
+                            minIndex = j;
+                        }
                     }
                 }
+                Student tempStudent = roster[minIndex];
+                roster[minIndex] = roster[i];
+                roster[i] = tempStudent;
+            } else {
+                for(int j = i + 1; j < size; j++) {
+                    if (roster[j].getLastPaymentDate() != null) {
+                        numStudents++;
+                        Student tempStudent = roster[minIndex];
+                        roster[minIndex] = roster[i];
+                        roster[i] = tempStudent;
+                        break;
+                    }
+                    if(j == size - 1) {
+                        break beginSorting;
+                    }
+                }
+                i--;
             }
-            Student tempAlbum = roster[minIndex];
-            roster[minIndex] = roster[i];
-            roster[i] = tempAlbum;
         }
         for (int i = 0; i < numStudents; i++) {
             System.out.println(roster[i].toString());
@@ -124,7 +140,7 @@ public class Roster {
             return "Student roster is empty!";
         }
         String rosterList = "* list of students in the roster **\n";
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             rosterList += roster[i].toString() + "\n";
         }
         rosterList += "* end of roster **";
