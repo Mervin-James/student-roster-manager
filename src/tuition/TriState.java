@@ -27,7 +27,7 @@ public class TriState extends NonResident {
                     RATE_PER_CREDIT_HOUR * numCredits +
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER * UNIVERSITY_FEE;
         }
-        super.setAmountDue(amountDue);
+        super.setAmountDue(amountDue - this.getTotalPayment());
     }
 
     @Override

@@ -76,6 +76,32 @@ public class Roster {
         return roster[studentIndex];
     }
 
+    public String printByName() {
+        if (size == 0) {
+            return "Student roster is empty!";
+        }
+        sortByName();
+        String rosterList = "* list of students ordered by name **\n";
+        for (int i = 0; i < size; i++) {
+            rosterList += roster[i].toString() + "\n";
+        }
+        rosterList += "* end of roster **";
+        return rosterList;
+    }
+
+    public String printByPayment() {
+        if (size == 0) {
+            return "Student roster is empty!";
+        }
+        int numStudents = sortByPayment();
+        String rosterList = "* list of students made payments ordered by payment date **\n";
+        for (int i = size - numStudents; i < size; i++) {
+            rosterList += roster[i].toString() + "\n";
+        }
+        rosterList += "* end of roster **";
+        return rosterList;
+    }
+
     public void sortByName() {
         for (int i = 0; i < size - 1; i++) {
             int minIndex = i;
@@ -92,11 +118,7 @@ public class Roster {
         }
     }
 
-    public void sortByPayment() {
-        if (size == 0) {
-            System.out.println("Student roster is empty!");
-            return;
-        }
+    public int sortByPayment() {
         int numStudents = 0;
         for (int i = 0; i < size; i++) {
             if (roster[i].getLastPaymentDate() != null) {
@@ -136,10 +158,7 @@ public class Roster {
         for (int i = 0; i < numStudents; i++) {
             roster[j++] = madePayments[i];
         }
-        System.out.println("* list of students made payments ordered by payment date **");
-        for (int i = 0; i < numStudents; i++) {
-            System.out.println(madePayments[i].toString());
-        }
+        return numStudents;
     }
 
     @Override

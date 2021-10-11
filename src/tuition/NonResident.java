@@ -44,7 +44,7 @@ public class NonResident extends Student {
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
                                     UNIVERSITY_FEE;
         }
-        super.setAmountDue(amountDue);
+        super.setAmountDue(amountDue - this.getTotalPayment());
     }
 
     /**

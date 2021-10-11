@@ -51,7 +51,7 @@ public class TuitionManager {
             }
         }
         sc.close();
-        System.out.println("Tuition Manager terminated.");
+        System.out.println("\nTuition Manager terminated.");
     }
 
     private void addStudent(Roster roster, String[] splitInput) {
@@ -215,7 +215,6 @@ public class TuitionManager {
             return;
         }
         float amountDue = student.getAmountDue();
-        float totalPayment = student.getTotalPayment();
         if (payment > amountDue) {
             System.out.println("Amount is greater than amount due.");
             return;
@@ -273,12 +272,11 @@ public class TuitionManager {
     }
 
     private void printRosterByName(Roster roster) {
-        roster.sortByName();
-        printRoster(roster);
+        System.out.println(roster.printByName());
     }
 
     private void printRosterByPayment(Roster roster) {
-        roster.sortByPayment();
+        System.out.println(roster.printByPayment());
     }
 
 }

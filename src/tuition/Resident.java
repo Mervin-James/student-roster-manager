@@ -1,5 +1,7 @@
 package tuition;
 
+import java.text.DecimalFormat;
+
 public class Resident extends Student {
     private static final float MAX_FINANCIAL_AID = 10000;
     private static final float FULL_TIME_TUITION_FEE = 12536;
@@ -36,12 +38,14 @@ public class Resident extends Student {
                             PART_TIME_UNIVERSITY_FEE_MULTIPLIER *
                                     UNIVERSITY_FEE - financialAid;
         }
-        super.setAmountDue(amountDue);
+        super.setAmountDue(amountDue - this.getTotalPayment());
     }
 
     @Override
     public String toString() {
-        return super.toString() + ":resident";
+        DecimalFormat df = new DecimalFormat("$###,##0.00");
+        return super.toString() + ":resident" + ((financialAid > 0) ?
+                ":financial aid " + df.format(getFinancialAid()) : "");
     }
 
     public float getFinancialAid() {
@@ -50,6 +54,7 @@ public class Resident extends Student {
 
     public void setFinancialAid(float financialAid) {
         this.financialAid = financialAid;
+        this.setAmountDue(this.getAmountDue() - financialAid);
     }
 
 }
