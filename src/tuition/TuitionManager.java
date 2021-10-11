@@ -6,6 +6,8 @@ public class TuitionManager {
     private static final int MIN_CREDITS = 3;
     private static final int MAX_CREDITS = 24;
     private static final int MIN_CREDITS_INTERNATIONAL = 12;
+    private static final float MIN_FINANCIAL_AID = 0;
+    private static final float MAX_FINANCIAL_AID = 10000;
     private static final int MIN_NUM_ARGUMENTS_FOR_VALID_COMMAND = 3;
     private static final int MIN_NUM_ARGUMENTS_FOR_CREDIT_HOURS = 4;
     private static final int MIN_NUM_ARGUMENTS_FOR_PAYMENT_AMOUNT = 4;
@@ -74,7 +76,7 @@ public class TuitionManager {
         int credits = 0;
         try {
             credits = Integer.parseInt(splitInput[3]);
-        } catch (NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             System.out.println("Invalid credit hours.");
             return;
         }
@@ -84,7 +86,7 @@ public class TuitionManager {
         } else if (credits < MIN_CREDITS) {
             System.out.println("Minimum credit hours is 3.");
             return;
-        } else if(credits > MAX_CREDITS) {
+        } else if (credits > MAX_CREDITS) {
             System.out.println("Credit hours exceed the maximum 24.");
             return;
         }
@@ -169,7 +171,7 @@ public class TuitionManager {
         Major major = checkMajor(splitInput[2]);
         Student student = new Student(name, major);
         boolean isStudentRemoved = roster.remove(student);
-        if(!isStudentRemoved) {
+        if (!isStudentRemoved) {
             System.out.println("Student is not in the roster.");
         } else {
             System.out.println("Student removed from the roster.");
@@ -262,9 +264,12 @@ public class TuitionManager {
             System.out.println("Awarded once already.");
             return;
         }
-        if (resident.isFinancialAidValid(aidAmount)) {
+        if (resident.getFinancialAid() > MIN_FINANCIAL_AID &&
+                resident.getFinancialAid() < MAX_FINANCIAL_AID) {
             resident.setFinancialAid(aidAmount);
             System.out.println("Tuition updated.");
+        } else {
+            System.out.println("Invalid amount.");
         }
     }
 

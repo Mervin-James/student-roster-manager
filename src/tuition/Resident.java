@@ -1,21 +1,29 @@
 package tuition;
 
+/**
+ * A class that defines a Resident student by name, major, and credits.
+ * This class contains methods for calculating the Resident student's
+ * amount of tuition due and for generating a String representation of this
+ * Resident student's information. This class also contains a getter and
+ * setter method for this Resident student's financialAid attribute.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class Resident extends Student {
     private static final float MAX_FINANCIAL_AID = 10000;
     private static final float FULL_TIME_TUITION_FEE = 12536;
     private static final float RATE_PER_CREDIT_HOUR = 404;
     private float financialAid;
 
+    /**
+     * Constructs a Resident object by their name, major, and credits.
+     * @param name the name of the Resident student.
+     * @param major the major of study of the Resident student.
+     * @param credits the number of credits the Resident student is
+     *                attempting.
+     */
     public Resident(String name, Major major, int credits) {
         super(name, major, credits);
-    }
-
-    public boolean isFinancialAidValid(float financialAid) {
-        if (financialAid > MAX_FINANCIAL_AID || financialAid < 0) {
-            System.out.println("Invalid amount.");
-            return false;
-        }
-        return true;
     }
 
     @Override
