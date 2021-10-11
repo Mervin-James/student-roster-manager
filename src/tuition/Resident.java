@@ -28,6 +28,12 @@ public class Resident extends Student {
         super(name, major, credits);
     }
 
+    /**
+     * Calculates the Resident student's due tuition payment.
+     * This method accounts for the tuition differences between part-time and
+     * full-time Resident students, including those who take more than 16
+     * credits.
+     */
     @Override
     public void tuitionDue() {
         int numCredits = super.getCredits();
@@ -49,6 +55,11 @@ public class Resident extends Student {
         super.setAmountDue(amountDue - this.getTotalPayment());
     }
 
+    /**
+     * Generates a String representation of this Resident student object.
+     *
+     * @return the String representation of this Resident student object.
+     */
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("$###,##0.00");
@@ -56,10 +67,19 @@ public class Resident extends Student {
                 ":financial aid " + df.format(getFinancialAid()) : "");
     }
 
+    /**
+     * Getter method for this Resident Student's financial aid attribute.
+     * @return this Resident student's financialAid attribute.
+     */
     public float getFinancialAid() {
         return this.financialAid;
     }
 
+    /**
+     * Setter method for this Resident student's financialAid attribute.
+     * @param financialAid the amount of financial aid for this Resident
+     *                     student.
+     */
     public void setFinancialAid(float financialAid) {
         this.financialAid = financialAid;
         this.setAmountDue(this.getAmountDue() - financialAid);

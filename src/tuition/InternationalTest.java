@@ -24,14 +24,22 @@ public class InternationalTest {
         assertEquals(5918f, iStudent.getAmountDue(), 0f);
 
         //test case #2: amount of tuition due for a full-time International
-        // student taking 16+x total credits should be $(35,655 + 966*x). In
-        // this test case, x is 2.
+        // student taking more than 16 credits should be $(35,655 + 966*x),
+        // where x is the number of credits over 16. In this test case, x
+        // is 2.
         iStudent = new International("Alex Jones", Major.CS, 18,
                 false);
         iStudent.tuitionDue();
         assertEquals((35655f + 966 * 2), iStudent.getAmountDue(), 0f);
 
-        //test case #3: amount of tuition due for a part-time International
+        //test case #3: amount of tuition due for a full-time International
+        // student taking at least 12 and less than 16 credits is $35,655.
+        iStudent = new International("Alex Jones", Major.CS, 15,
+                false);
+        iStudent.tuitionDue();
+        assertEquals((35655f), iStudent.getAmountDue(), 0f);
+
+        //test case #4: amount of tuition due for a part-time International
         // student taking x total credits should be $(2614.40 + 966*x). In
         // this test case, x is 9
         iStudent = new International("Alex Jones", Major.CS, 9,

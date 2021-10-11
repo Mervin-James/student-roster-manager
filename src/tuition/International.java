@@ -52,7 +52,8 @@ public class International extends NonResident {
     /**
      * Calculates the International student's due tuition payment.
      * This method accounts for the tuition differences between part-time and
-     * full-time international students.
+     * full-time international students, including those who take more than
+     * 16 credits.
      */
     @Override
     public void tuitionDue() {
