@@ -247,7 +247,7 @@ public class TuitionManager {
         float aidAmount = Float.parseFloat(splitInput[3]);
         Student student = roster.retrieveStudent(new Student(name, major));
         if (student == null) {
-            System.out.println("Student not in roster.");
+            System.out.println("Student not in the roster.");
             return;
         } else if (student.getCredits() < 12) {
             System.out.println("Parttime student doesn't qualify for the " +

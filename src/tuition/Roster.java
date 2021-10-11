@@ -95,42 +95,50 @@ public class Roster {
     public void sortByPayment() {
         if (size == 0) {
             System.out.println("Student roster is empty!");
+            return;
         }
         int numStudents = 0;
-        beginSorting: for (int i = 0; i < size - 1; i++) {
-            int minIndex = i;
+        for (int i = 0; i < size; i++) {
             if (roster[i].getLastPaymentDate() != null) {
-                for (int j = i + 1; j < size; j++) {
-                    if (roster[j].getLastPaymentDate() != null) {
-                        numStudents++;
-                        if (roster[j].getLastPaymentDate()
-                                .compareTo(roster[minIndex].getLastPaymentDate()) ==
-                                -1) {
-                            minIndex = j;
-                        }
-                    }
-                }
-                Student tempStudent = roster[minIndex];
-                roster[minIndex] = roster[i];
-                roster[i] = tempStudent;
-            } else {
-                for(int j = i + 1; j < size; j++) {
-                    if (roster[j].getLastPaymentDate() != null) {
-                        numStudents++;
-                        Student tempStudent = roster[minIndex];
-                        roster[minIndex] = roster[i];
-                        roster[i] = tempStudent;
-                        break;
-                    }
-                    if(j == size - 1) {
-                        break beginSorting;
-                    }
-                }
-                i--;
+                numStudents++;
             }
         }
+        Student[] madePayments = new Student[numStudents];
+        Student[] didNotMakePayments = new Student[size - numStudents];
+        int k = 0;
+        int l = 0;
+        for (int i = 0; i < size; i++) {
+            if (roster[i].getLastPaymentDate() != null) {
+                madePayments[k++] = roster[i];
+            } else {
+                didNotMakePayments[l++] = roster[i];
+            }
+        }
+        for (int i = 0; i < numStudents - 1; i++) {
+            int minIndex = i;
+            if (madePayments[i].getLastPaymentDate() != null) {
+                for (int j = i + 1; j < numStudents; j++) {
+                    if (madePayments[j].getLastPaymentDate()
+                        .compareTo(madePayments[minIndex].getLastPaymentDate()) ==
+                        -1) {
+                    minIndex = j;
+                    }
+                }
+                Student tempStudent = madePayments[minIndex];
+                madePayments[minIndex] = madePayments[i];
+                madePayments[i] = tempStudent;
+            }
+        }
+        int j = 0;
+        for (int i = 0; i < size - numStudents; i++) {
+            roster[j++] = didNotMakePayments[i];
+        }
         for (int i = 0; i < numStudents; i++) {
-            System.out.println(roster[i].toString());
+            roster[j++] = madePayments[i];
+        }
+        System.out.println("* list of students made payments ordered by payment date **");
+        for (int i = 0; i < numStudents; i++) {
+            System.out.println(madePayments[i].toString());
         }
     }
 
