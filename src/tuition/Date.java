@@ -13,10 +13,7 @@ import java.util.StringTokenizer;
  * @author Akshar Patel, Mervin James
  */
 public class Date implements Comparable<Date> {
-    //    public static final int QUADRENNIAL = 4;
-//    public static final int CENTENNIAL = 100;
-//    public static final int QUATERCENTENNIAL = 400;
-    public static final int CURRENT_YEAR = 2021;
+    private static final int CURRENT_YEAR = 2021;
     private final int year;
     private final int month;
     private final int day;
@@ -36,7 +33,7 @@ public class Date implements Comparable<Date> {
     } //take 'mm/dd/yyyy' and create a Date object
 
     /**
-     * Default constructor for the Date class.
+     * Default constructor for the Date class, which represents today's date.
      * This constructor generates a Date object with today's month, day, and
      * year.
      */
@@ -48,16 +45,6 @@ public class Date implements Comparable<Date> {
     } //create an object with today’s date (see Calendar class)
 
     /**
-     * Generates a Date object with today's date information.
-     *
-     * @return an instance of a Date object with today's month, day, and year
-     * as attributes.
-     */
-    public Date today() {
-        return new Date();
-    }
-
-    /**
      * Determines if this Date object has valid attributes.
      *
      * @return true if this Date object has a valid date between 1980 and the
@@ -67,7 +54,7 @@ public class Date implements Comparable<Date> {
         if (this.year != CURRENT_YEAR) {
             return false;
         }
-        if (this.compareTo(today()) >= 0) {
+        if (this.compareTo(new Date()) >= 0) {
             return false;
         }
         if (this.month < 1 || this.day < 1 || this.year < 1) {

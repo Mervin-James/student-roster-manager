@@ -154,13 +154,18 @@ public class DateTest {
         date = new Date("10/32/2021");
         assertFalse(date.isValid());
 
-        //test case #30: a date preceding the current date (10/10/2021) and
+        //test case #30: a date preceding the current date and
         // with valid year, month in October, and day less than or equal to
         // 31 should be valid.
         date = new Date("10/9/2021");
         assertTrue(date.isValid());
 
-        //test case #31: a date with a year after 2021 should be invalid.
+        //test case #31: a date with the current date and with valid year,
+        // month in October, and day less than or equal to 31 should be valid.
+        date = new Date();
+        assertFalse(date.isValid());
+
+        //test case #32: a date with a year after 2021 should be invalid.
         date = new Date("1/1/2022");
         assertFalse(date.isValid());
     }
