@@ -4,9 +4,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class that conducts JUnit tests on add() and remove() from Roster class.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class RosterTest {
 
-    @Test
+    /**
+     * Conducts a JUnit test on add() from the Roster class.
+     */
+    @org.junit.Test
     public void add() {
         Student[] sList = new Student[4];
         Roster roster = new Roster(sList);
@@ -58,7 +66,10 @@ public class RosterTest {
         assertFalse(roster.add(iStudent));
     }
 
-    @Test
+    /**
+     * Conducts a JUnit test on remove() from the Roster class.
+     */
+    @org.junit.Test
     public void remove() {
         Student[] sList = new Student[4];
         Roster roster = new Roster(sList);
